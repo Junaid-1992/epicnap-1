@@ -1,27 +1,47 @@
 
 import 'package:first_project/screens/auth_module/create_password_screen.dart';
+import 'package:first_project/screens/auth_module/introduction_screen.dart';
+import 'package:first_project/screens/auth_module/name_screen.dart';
+import 'package:first_project/screens/auth_module/newlogin_screen.dart';
 import 'package:first_project/screens/auth_module/otp_screen.dart';
+import 'package:first_project/screens/auth_module/setpass_screen.dart';
+import 'package:first_project/screens/auth_module/thank_screen.dart';
 import 'package:first_project/screens/auth_module/welcome_screen.dart';
 import 'package:first_project/screens/home_module/account_setting_screen.dart';
+import 'package:first_project/screens/home_module/alarm_screen.dart';
+import 'package:first_project/screens/home_module/analysis_screen.dart';
+import 'package:first_project/screens/home_module/antisleep.dart';
+import 'package:first_project/screens/home_module/bedtime_screen.dart';
 import 'package:first_project/screens/home_module/category_setting_screen.dart';
 import 'package:first_project/screens/home_module/chat_screen.dart';
 import 'package:first_project/screens/home_module/course_screen.dart';
 import 'package:first_project/screens/home_module/dashboard_screen.dart';
 import 'package:first_project/screens/home_module/edit_profile_screen.dart';
+import 'package:first_project/screens/home_module/faq_screen.dart';
+import 'package:first_project/screens/home_module/history_screen.dart';
 import 'package:first_project/screens/home_module/influencer_dashboard_screen.dart';
 import 'package:first_project/screens/home_module/influencer_home_screen.dart';
 import 'package:first_project/screens/home_module/influencer_screen.dart';
+import 'package:first_project/screens/home_module/maindashboard_screen.dart';
 import 'package:first_project/screens/home_module/payment_add_screen.dart';
 import 'package:first_project/screens/home_module/payment_screen.dart';
 import 'package:first_project/screens/home_module/payment_setting_screen.dart';
 import 'package:first_project/screens/home_module/paypalscreen.dart';
+import 'package:first_project/screens/home_module/privacy_screen.dart';
+import 'package:first_project/screens/home_module/profile_screen.dart';
+import 'package:first_project/screens/home_module/setalarm_screen.dart';
+import 'package:first_project/screens/home_module/settings_screen.dart';
 import 'package:first_project/screens/home_module/single_course_screen.dart';
 import 'package:first_project/screens/home_module/single_influencer_screen.dart';
 import 'package:first_project/screens/home_module/support_screen.dart';
+import 'package:first_project/screens/home_module/tracking_screen.dart';
 import 'package:first_project/utils/app_constant.dart';
 import 'package:first_project/utils/screen_bindings.dart';
 import 'package:get/get.dart';
 
+import '../screens/auth_module/accept_screen.dart';
+import '../screens/auth_module/age_screen.dart';
+import '../screens/auth_module/email_screen.dart';
 import '../screens/auth_module/forget_screen.dart';
 import '../screens/auth_module/login_screen.dart';
 import '../screens/auth_module/register_screen.dart';
@@ -168,6 +188,140 @@ class RouteGenerator {
         page: () => const PaymentAddScreen(),
         binding: ScreenBindings(),
       ),
+
+      // new app
+
+
+      GetPage(
+        name: AppConstant.kAcceptScreen,
+        page: () => const AcceptScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+
+      GetPage(
+        name: AppConstant.kNameScreen,
+        page: () => const NameScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kAgeScreen,
+        page: () => const AgeScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kEmailScreen,
+        page: () => const EmailScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kSetPassScreen,
+        page: () => const SetPassScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kNewLoginScreen,
+        page: () => const NewloginScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+
+      GetPage(
+        name: AppConstant.kMainDashboardScreen,
+        page: () => const MainDashboradScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kHistoryScreen,
+        page: () => const HistoryScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kAntisleepScreen,
+        page: () => const AntisleepScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kAnalysisScreen,
+        page: () => const AnalysisScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kProfileScreen,
+        page: () => const ProfileScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kBedtimeScreen,
+        page: () => const BedTimeScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kTrackingScreen,
+        page: () => const TrackingScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kAlarmScreen,
+        page: () => const AlarmScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kSetAlarmScreen,
+        page: () => const SetAlarmScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kPrivacyScreen,
+        page: () => const PrivacyScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kFaqScreen,
+        page: () => const FaqScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kSettingsScreen,
+        page: () => const SettingsScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kIntroductionScreen,
+        page: () => const IntroductionScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kThankScreen,
+        page: () => const ThankScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+
+
 
 
 

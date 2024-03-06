@@ -31,7 +31,7 @@ class CustomPrimaryButton extends StatelessWidget {
           buttonText,
           style:  TextStyle(
             color: textColor,
-            fontSize: 18, // Increase the font size of the button text
+            fontSize: 22, // Increase the font size of the button text
             fontWeight: FontWeight.bold,
           ),
         ),

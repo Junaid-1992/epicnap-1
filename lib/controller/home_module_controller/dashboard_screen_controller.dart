@@ -1,8 +1,13 @@
 
 
 import 'package:first_project/screens/custom_widgets/custom_dialog.dart';
+import 'package:first_project/screens/home_module/analysis_screen.dart';
+import 'package:first_project/screens/home_module/antisleep.dart';
 import 'package:first_project/screens/home_module/course_screen.dart';
+import 'package:first_project/screens/home_module/history_screen.dart';
 import 'package:first_project/screens/home_module/influencer_home_screen.dart';
+import 'package:first_project/screens/home_module/maindashboard_screen.dart';
+import 'package:first_project/screens/home_module/profile_screen.dart';
 import 'package:first_project/screens/home_module/support_screen.dart';
 // import 'package:first_project/support.dart';
 import 'package:first_project/utils/app_constant.dart';
@@ -27,28 +32,30 @@ class DashboardScreenController  extends GetxController{
  RxInt id = 0.obs;
  @override
 
- void onInit() {
-  super.onInit();
-  print('abcd');
-  final userModel = Get.arguments as UserModel; // Cast the arguments to UserModel
-
-  name.value = userModel.name ?? "Test Data";
-
-  email.value = userModel.email ?? "";
-
-  id.value = userModel.id;
-
-  print(id.value);
- }
+ // void onInit() {
+ //  super.onInit();
+ //  print('abcd');
+ //  final userModel = Get.arguments as UserModel; // Cast the arguments to UserModel
+ //
+ //  name.value = userModel.name ?? "Test Data";
+ //
+ //  email.value = userModel.email ?? "";
+ //
+ //  id.value = userModel.id;
+ //
+ //  print(id.value);
+ // }
 
 
  final List<Widget> listOfScreens=[
-  const HomeScreen(),
+  const MainDashboradScreen(),
   // const InfluencerHomeScreen(),
-  const CourseScreen(),
+  const HistoryScreen(),
   // Support(),
-  const SupportScreen(),
-  const InfluencerScreen()
+  // const AntisleepScreen(),
+  const AntisleepScreen(),
+  const ProfileScreen(),
+  // const ProfileScreen(),
 
  ];
 

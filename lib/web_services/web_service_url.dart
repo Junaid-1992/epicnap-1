@@ -1,4 +1,5 @@
-const String baseUrl = 'https://abiola.conceptrecall.com';
+// const String baseUrl = 'https://abiola.conceptrecall.com';
+const String baseUrl = 'http://127.0.0.1:8000';
 const String registerUrl = '$baseUrl/api/register';
 const String loginUrl = '$baseUrl/api/login';
 const String editProfileUrl = '$baseUrl/api/edit_profile';

@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 class WelcomeScreenController  extends GetxController{
 
   void onLoginTap(){
-    Get.toNamed(AppConstant.kLoginScreen);
+    Get.toNamed(AppConstant.kAcceptScreen);
   }
 
   void onRegisterTap(){
     Get.toNamed(AppConstant.kRegisterScreen);
   }
-
 
 }

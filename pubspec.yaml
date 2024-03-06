@@ -40,7 +40,11 @@ dependencies:
   get: ^4.6.5
   flutter_launcher_icons: ^0.9.2
   image_picker: ^1.0.6
+  circle_nav_bar: ^2.0.1+1
   path: ^1.8.0
+  fl_chart: ^0.66.2
+  intl: ^0.19.0
+
 
 #  webview_flutter: ^4.4.3
 
@@ -111,6 +115,57 @@ flutter:
     - assets/active_person.png
 
     - assets/abiola.png
+    - assets/White version 1.png
+    - assets/Splash Screen.png
+    - assets/Group_facebook.png
+    - assets/Group_google.png
+    - assets/play.png
+    - assets/purple.png
+    - assets/top.png
+    - assets/sun.png
+    - assets/clock.png
+    - assets/bed.png
+    - assets/time.png
+    - assets/octobar.png
+    - assets/sleep.png
+    - assets/moon.png
+    - assets/Interruption.png
+    - assets/zzz.png
+    - assets/item1.png
+    - assets/item2.png
+    - assets/item3.png
+    - assets/item4.png
+    - assets/emoji.png
+    - assets/bell.png
+    - assets/volume.png
+    - assets/tick.png
+    - assets/moonsleep.png
+    - assets/zz.png
+    - assets/jessy.png
+    - assets/list.png
+    - assets/list.png
+    - assets/setting.png
+    - assets/logout.png
+    - assets/previous.png
+    - assets/timechart.png
+    - assets/alarm.png
+    - assets/Rectangle.png
+    - assets/music.png
+    - assets/plus.png
+    - assets/dot.png
+    - assets/support.png
+    - assets/mobile.png
+    - assets/profile.png
+    - assets/security.png
+    - assets/notification.png
+    - assets/privacy.png
+    - assets/flag.png
+    - assets/pause.png
+    - assets/logos.png
+    - assets/timer.png
+    - assets/icons.png
+    - assets/stars.png
+    - assets/thumbs.png
 
 
 

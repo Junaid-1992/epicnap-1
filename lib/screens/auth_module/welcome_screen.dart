@@ -13,143 +13,83 @@ class WelcomeScreen extends GetView<WelcomeScreenController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: Color(0xffF5F5FF),
-          child: Center(
-
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF281f57),
+              Color(0xFF161D34),
+              Color(0xFF161D34),
+              Color(0xFF281f57),
+            ],
+            stops: [0.0, 0.1, 0.85, 1.0],
+          ),
+        ),
+        child: SafeArea(
+          child: Align(
+            alignment: Alignment.bottomCenter,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding: EdgeInsets.only(left: 30),
-                    // color: CustomAppColor.kWhiteColor,
-                    color: Color(0xffF5F5FF),
-                    child: Image.asset(
-                      'assets/Group 36730.png',
-                      width: 350,
-                      height: 350,
-                    ),
+                SizedBox(height: 250),
+                Container(
+                  color: Colors.transparent,
 
+                  child: Image.asset(
+                    'assets/White version 1.png',
+                      width: 220,
                   ),
-
                 ),
-                Expanded(
+                SizedBox(height: 30),
+                Padding(
+                  padding: EdgeInsets.only(right: 30,left: 30),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Improve your sleep quality with us',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
 
 
-                  flex: 1,
-                  child: ClipRRect(
-
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0),
                     ),
+                  ),
+                ),
+
+
+                Padding(
+                  padding: EdgeInsets.only(right: 20,left: 20, top:30 ),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Add your functionality or navigation logic here
+                     controller.onLoginTap();
+                    },
                     child: Container(
-                      color: CustomAppColor.kBlackColor.withOpacity(0.87),
-                      child: Center(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                // padding: const EdgeInsets.only(bottom: 0),
-                                child: Image.asset(
-                                  'assets/logo-ab.png', // Path to your asset image
-                                  width: 250,
-                                  // height: 150,
-                                  // Set the height of the image
-                                ),
-                              ),
-                               Padding(
-                                padding: EdgeInsets.only(bottom: 20,right: 30,left: 30,top: 10),
-                                child: Text(
-                                  textAlign: TextAlign.center,
-                                  'Is your wisdom a course? Because I am ready to enroll in the school of your insights.',
-                                  style: TextStyle(
-                                    color: CustomAppColor.kWhiteColor,
-                                    fontSize: 16,
-
-
-                                  ),
-                                ),
-                              ),
-                             Padding(
-                               padding: const EdgeInsets.symmetric(
-
-                                 horizontal: 30
-                               ),
-
-                               child: CustomPrimaryButton(buttonText: 'Login',  onButtonPressed: (){
-                                 controller.onLoginTap();
-                               }),
-                             ),
-                              const SizedBox(height: 20),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-
-                                  horizontal: 30
-                                ),
-                                child: CustomPrimaryButton(buttonText: 'Register', onButtonPressed: (){
-                                  controller.onRegisterTap();
-                                },buttonColor: CustomAppColor.kLightGrey,textColor: CustomAppColor.kBlackColor,),
-                              ),// Add some space between the buttons
-
-                              // Padding(
-                              //   padding: const EdgeInsets.only(bottom: 10, top: 20),
-                              //   child: RichText(
-                              //     text:  TextSpan(
-                              //       children: [
-                              //         const TextSpan(
-                              //           text: 'Continue as a ',
-                              //           style: TextStyle(
-                              //             color: CustomAppColor.kWhiteColor,
-                              //             fontSize: 14,
-                              //             fontWeight: FontWeight.bold,
-                              //           ),
-                              //         ),
-                              //         TextSpan(
-                              //           text: 'guest',
-                              //           style: const TextStyle(
-                              //             color: CustomAppColor.kOrange, // Set brown color for 'Register now'
-                              //             fontSize: 14,
-                              //             fontWeight: FontWeight.bold,
-                              //           ),
-                              //           recognizer: TapGestureRecognizer()..onTap=()
-                              //             {
-                              //               // Get.to(HomeScreen());
-                              //               Get.toNamed(AppConstant.kDashboardScreen);
-                              //             }
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // )
-
-
-
-
-
-
-
-                            ],
-                          ),
+                      padding: EdgeInsets.only(left: 100, right: 100, top: 15, bottom: 15),
+                      decoration: BoxDecoration(
+                        color:  Color(0xff8650F6),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        'Setup profile',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ),
-                )
-
+                ),
 
 
               ],
             ),
-
-
           ),
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 

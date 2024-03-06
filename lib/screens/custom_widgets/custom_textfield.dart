@@ -44,11 +44,11 @@ class CustomTextField extends StatelessWidget{
     this.onChanged,
     this.readOnly = false,
     this.fillColor,
-    this.radius = 8,
+    this.radius = 12,
     this.controller,
     this.isMultiLine = false,
     this.focusNode,
-    this.height = 60,
+    this.height = 70,
     this.width = double.infinity,
     this.textInputAction,
     this.paddingHorizontal = 0,
@@ -62,16 +62,16 @@ class CustomTextField extends StatelessWidget{
       height: isMultiLine ? null : height,
       width: width,
       decoration: BoxDecoration(
-          color: Color(0xffF5F5FF),
-          borderRadius: BorderRadius.circular(10),
+          color: Color(0xffD8D8D8).withOpacity(0.2),
+          borderRadius: BorderRadius.circular(12),
           // border: const Border.symmetric(),
           border: Border.all(
-            color: Colors.black12, // Set your desired border color here
-            width: 2, // Set the border width
+            color: Color(0xff848484).withOpacity(0.3), // Set your desired border color here
+            width: 1, // Set the border width
           ),
           boxShadow: [
-            const BoxShadow(
-                color: Colors.white12, blurRadius: 6, offset: Offset(0, 2))
+            // const BoxShadow(
+            //     color: Color(0xff848484), blurRadius: 6, offset: Offset(0, 2))
           ]),
       child: TextField(
         readOnly: readOnly,
@@ -84,15 +84,18 @@ class CustomTextField extends StatelessWidget{
         maxLength: maxLength,
         keyboardType: keyBoardType,
         style: const TextStyle(
-          color: Colors.black87,
+          color: Colors.white,
         ),
         decoration:  InputDecoration(
             border: InputBorder.none,
-            contentPadding: const EdgeInsets.only(right: 10),
+            contentPadding: const EdgeInsets.only(left: 15,),
             prefixIcon: prefixIcon,
             hintText: hintText,
             hintStyle: const TextStyle(
-              color: Colors.black54,
+              color: Color(0xffDFDFDF),
+              fontSize: 20,
+              // fontWeight: FontWeight.bold
+
             )),
         onChanged: (text) {
           if(onChanged!=null) {

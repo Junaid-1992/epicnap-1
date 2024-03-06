@@ -23,4 +23,27 @@ class AppConstant{
   static const String kPaymentSettingScreen="/PAYMENT_SETTING_SCREEN";
   static const String kCategorySettingScreen="/CATEGORY_SETTING_SCREEN";
   static const String kPaymentAddScreen="/PAYMENT_ADD_SCREEN";
+
+
+
+  static const String kAcceptScreen="/ACCEPT_SCREEN";
+  static const String kNameScreen="/NAME_SCREEN";
+  static const String kAgeScreen="/AGE_SCREEN";
+  static const String kEmailScreen="/EMAIL_SCREEN";
+  static const String kSetPassScreen="/SET_PASS_SCREEN";
+  static const String kNewLoginScreen="/NEWLOGIN_SCREEN";
+  static const String kMainDashboardScreen="/MAINDASHBOARD_SCREEN";
+  static const String kHistoryScreen="/HISTORY_SCREEN";
+  static const String kAntisleepScreen="/ANTISLEEP_SCREEN";
+  static const String kAnalysisScreen="/ANALYSIS_SCREEN";
+  static const String kProfileScreen="/PROFILE_SCREEN";
+  static const String kBedtimeScreen="/BEDTIME_SCREEN";
+  static const String kTrackingScreen="/TRACKING_SCREEN";
+  static const String kAlarmScreen="/ALARM_SCREEN";
+  static const String kSetAlarmScreen="/SETALARM_SCREEN";
+  static const String kPrivacyScreen="/PRIVACY_SCREEN";
+  static const String kFaqScreen="/FAQ_SCREEN";
+  static const String kSettingsScreen="/SETTINGS_SCREEN";
+  static const String kIntroductionScreen="/INTRODUCTION_SCREEN";
+  static const String kThankScreen="/THANK_SCREEN";
 }
