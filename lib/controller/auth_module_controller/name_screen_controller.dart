@@ -11,7 +11,8 @@ import '../../web_services/user_services.dart';
 class NameScreenController  extends GetxController{
   TextEditingController nameController = TextEditingController();
 
-
+  ProgressDialog progressDialog = ProgressDialog();
+  UserServices userServices = UserServices();
   void onLoginTap(){
     Get.toNamed(AppConstant.kAgeScreen);
   }
@@ -19,20 +20,24 @@ class NameScreenController  extends GetxController{
   void onRegisterTap(){
     Get.toNamed(AppConstant.kRegisterScreen);
   }
-
-  // void selectDate(BuildContext context) async {
-  //   DateTime picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: selectedDate.value,
-  //     firstDate: DateTime(2000),
-  //     lastDate: DateTime(2101),
-  //   );
-  //
-  //   if (picked != null && picked != selectedDate.value) {
-  //     selectedDate(picked);
-  //     dateController.text = DateFormat('yyyy-MM-dd').format(selectedDate.value);
-  //   }
-  // }
+  Future<void> login() async{
+    progressDialog.showDialog();
+    // UserModel userModel=await userServices.loginUser(email: nameController.text);
+    // print(userModel.toString());
+    // if(userModel.type=="influencer"){
+    //   progressDialog.dismissDialog();
+    //
+    //   Get.offNamed(AppConstant.kInfluencerDashboardScreen,arguments: userModel);
+    //
+    // }
+    // else if(userModel.type =="user"){
+    //   progressDialog.dismissDialog();
+    //   Get.offNamed(AppConstant.kDashboardScreen,arguments: userModel);
+    // }
+    // else{
+    //   progressDialog.dismissDialog();
+    // }
+  }
 
 
 }
