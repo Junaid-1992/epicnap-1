@@ -9,6 +9,7 @@ import 'package:first_project/welcome.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../controller/auth_module_controller/name_screen_controller.dart';
 import '../custom_widgets/custom_textfield.dart';
@@ -19,9 +20,10 @@ class BedTimeScreen extends GetView<BedTimeScreenController>{
 
 
 
+
   @override
   Widget build(BuildContext context) {
-    bool isSwitched = false;
+    bool isSwitched = true;
 
 
     return Scaffold(
@@ -102,8 +104,116 @@ class BedTimeScreen extends GetView<BedTimeScreenController>{
 
            Container(
              padding: EdgeInsets.only(left: 30, right: 30),
-             child: Image.asset(
-               'assets/timer.png'
+             // child: Image.asset(
+             //   'assets/timer.png'
+             // ),
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 // Widget to display selected alarm time
+                 Obx(() {
+                   return controller.selectedTime.value != null
+                       ? Text(
+                     'Selected Alarm Time: ${DateFormat.Hm().format(controller.selectedTime.value!)}',
+                     style: TextStyle(fontSize: 16),
+                   )
+                       : SizedBox();
+                 }),
+
+                 Row(
+                   children: [
+                     Expanded(
+                       child: Container(margin: EdgeInsets.only(top: 0, bottom: 0), // Adjust margin for the paddings
+                         padding: EdgeInsets.all(20), // Adjust padding for the entire content
+                         decoration: BoxDecoration(
+                           color: Color(0xffD8D8D8).withOpacity(0.2), // Set your desired box color
+                           borderRadius: BorderRadius.circular(20), // Optional: Add border radius
+                         ),
+                         child: Column(
+                           children: [
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: <Widget>[
+
+                                 Flexible(
+                                   // padding: const EdgeInsets.only(left: 0.0, top: 0),
+                                   child: Column(
+                                     children: [
+                                       Text(
+                                         'Select Alarm Type',
+                                         style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white,
+                                         ),
+                                       ),
+
+
+                                     ],
+                                   ),
+                                 ),
+
+
+                                 Padding(
+                                   padding: const EdgeInsets.only(left: 0.0,bottom: 0),
+
+                                   child: GestureDetector(
+                                     onTap: () {
+                                       controller.selectTime(context);
+                                     },
+                                     child: Image.asset(
+                                       'assets/plus.png', // Replace with the path to your back icon image
+                                        width: 50,
+
+                                     ),
+                                   ),
+                                 ),
+
+
+
+
+
+
+
+
+                                 // Add other text widgets or content if needed
+                               ],
+                             ),
+
+                           ],
+                         ),
+
+
+
+
+
+
+
+
+                       ),
+
+                     ),
+
+                   ],
+                 ),
+
+
+                 // Button to select alarm time
+                 // Container(
+                 //   padding: EdgeInsets.only(left: 20, right:20, top: 15),
+                 //
+                 //   child: ElevatedButton(
+                 //     onPressed: () => controller.selectTime(context),
+                 //     child: Text('Select Alarm Time'),
+                 //   ),
+                 // ),
+
+                 // Button to set the alarm
+                 // ElevatedButton(
+                 //   onPressed: () => controller.scheduleAlarm(),
+                 //   child: Text('Set Alarm'),
+                 // ),
+               ],
              ),
            ),
                 SizedBox(
@@ -441,7 +551,7 @@ class BedTimeScreen extends GetView<BedTimeScreenController>{
                       horizontal: 20
                   ),
                   child: CustomPrimaryButton(buttonText: 'Set', onButtonPressed: (){
-                    controller.onTracking();
+                    controller.scheduleAlarm();
                   },buttonColor: Color(0xff8650F6),textColor: Colors.white,),
                 ),
 
