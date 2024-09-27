@@ -76,39 +76,45 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30.0),
-                      child: Image.asset(
-                        'assets/top.png',
-                        width: 40,
-
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 30.0),
+                    //   child: Image.asset(
+                    //     'assets/top.png',
+                    //     width: 40,
+                    //
+                    //   ),
+                    // ),
                   ],
                 ),
 
 
-                Container(
-                  height: 220,
-
-
-                  // padding: EdgeInsets.symmetric(horizontal: 40 , vertical: 40 ),
-                  padding: EdgeInsets.only(bottom: 30, left: 20, right:20),
-
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/purple.png'),
-                      fit: BoxFit.cover,
-
-
-                    ),
-                  ),
-
+                GestureDetector(
+                  onTap:(){
+                    controller.onBreathTap();
+                  },
                   child: Container(
-                    padding: EdgeInsets.only(top: 30),
+                    height: 200,
 
-                    // Adjust the left value as needed
-                    // child: buildCountry(),
+
+                    // padding: EdgeInsets.symmetric(horizontal: 40 , vertical: 40 ),
+                    padding: EdgeInsets.only(bottom: 30, left: 20, right:20),
+
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/breathe.png'),
+                        fit: BoxFit.cover,
+
+
+
+                      ),
+                    ),
+
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30),
+
+                      // Adjust the left value as needed
+                      // child: buildCountry(),
+                    ),
                   ),
                 ),
 
@@ -135,7 +141,7 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 5),
+                                      padding: const EdgeInsets.only(left: 0),
                                       child: Container(
 
                                         decoration: BoxDecoration(
@@ -159,11 +165,13 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
                                     Padding(
                                       padding: const EdgeInsets.only(left: 0.0),
                                       child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 25.0),
+                                            padding: const EdgeInsets.only(left: 10.0),
                                             child: Text(
-                                              'You need some rest',
+                                              'Need a break',
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
@@ -174,11 +182,11 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
 
                                           Container(
                                             padding: const EdgeInsets.only(top: 15.0, left: 10),
-                                            width: 240,
+                                            width: 220,
 
                                             // width: MediaQuery.of(context).size.width - 150,  // Adjust the width based on your layout
                                             child: Text(
-                                              'You had a lots of stressful work today',
+                                              'Wind down with a mindfulness technique',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 color: Colors.white,
@@ -209,207 +217,205 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
                 ),
 
 
-                SizedBox(
-                  height: 20,
-                ),
-
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 0, bottom: 0, right: 10, left: 20), // Adjust margin for the paddings
-                        padding: EdgeInsets.all(20), // Adjust padding for the entire content
-                        decoration: BoxDecoration(
-                          color: Color(0xff8650F6).withOpacity(0.7), // Set your desired box color
-                          borderRadius: BorderRadius.circular(20), // Optional: Add border radius
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 0, bottom: 10),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.white.withOpacity(0.1), // shadow color
-                                          spreadRadius: 0, // spread radius
-                                          blurRadius: 15, // blur radius
-                                          offset: Offset(0, 4), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/tick.png',
-                                      width: 40,
-                                    ),
-                                  ),
-                                ),
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  // padding: const EdgeInsets.only(left: 0.0, top: 0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        '40% Quality',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-
-                                      Container(
-                                        width: 130,
-                                        child: Text(
-                                          'Improve sleep quality by following next steps',
-                                          style: TextStyle(
-                                            fontSize: 12,
-
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
 
 
 
-
-
-
-
-
-
-
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-                          ],
-                        ),
-
-
-
-
-
-
-
-
-                      ),
-
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 0, bottom: 0, right: 20, left: 0), // Adjust margin for the paddings
-                        padding: EdgeInsets.all(20), // Adjust padding for the entire content
-                        decoration: BoxDecoration(
-                          color: Color(0xffD8D8D8).withOpacity(0.2), // Set your desired box color
-                          borderRadius: BorderRadius.circular(20), // Optional: Add border radius
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 0, bottom: 10),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.white.withOpacity(0.2), // shadow color
-                                          spreadRadius: 0, // spread radius
-                                          blurRadius: 7, // blur radius
-                                          offset: Offset(0, 4), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/volume.png',
-                                      width: 40,
-                                    ),
-                                  ),
-                                ),
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  // padding: const EdgeInsets.only(left: 0.0, top: 10),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        '60% Noise',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-
-                                      Container(
-                                        width: 130,
-                                        child: Text(
-                                          'Reduce noise by taking necessary steps',
-                                          style: TextStyle(
-                                            fontSize: 12,
-
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-
-
-
-
-
-
-
-
-
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-                          ],
-                        ),
-
-
-
-
-
-
-
-
-                      ),
-
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: Container(
+                //         margin: EdgeInsets.only(top: 0, bottom: 0, right: 10, left: 20), // Adjust margin for the paddings
+                //         padding: EdgeInsets.all(20), // Adjust padding for the entire content
+                //         decoration: BoxDecoration(
+                //           color: Color(0xff8650F6).withOpacity(0.7), // Set your desired box color
+                //           borderRadius: BorderRadius.circular(20), // Optional: Add border radius
+                //         ),
+                //         child: Column(
+                //           children: [
+                //             Row(
+                //               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: <Widget>[
+                //                 Padding(
+                //                   padding: const EdgeInsets.only(left: 0, bottom: 10),
+                //                   child: Container(
+                //                     decoration: BoxDecoration(
+                //                       boxShadow: [
+                //                         BoxShadow(
+                //                           color: Colors.white.withOpacity(0.1), // shadow color
+                //                           spreadRadius: 0, // spread radius
+                //                           blurRadius: 15, // blur radius
+                //                           offset: Offset(0, 4), // changes position of shadow
+                //                         ),
+                //                       ],
+                //                     ),
+                //                     child: Image.asset(
+                //                       'assets/tick.png',
+                //                       width: 40,
+                //                     ),
+                //                   ),
+                //                 ),
+                //
+                //
+                //                 // Add other text widgets or content if needed
+                //               ],
+                //             ),
+                //
+                //             Row(
+                //               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: <Widget>[
+                //                 Flexible(
+                //                   // padding: const EdgeInsets.only(left: 0.0, top: 0),
+                //                   child: Column(
+                //                     children: [
+                //                       Text(
+                //                         '40% Quality',
+                //                         style: TextStyle(
+                //                           fontSize: 20,
+                //                           fontWeight: FontWeight.bold,
+                //                           color: Colors.white,
+                //                         ),
+                //                       ),
+                //
+                //                       Container(
+                //                         width: 130,
+                //                         child: Text(
+                //                           'Improve sleep quality by following next steps',
+                //                           style: TextStyle(
+                //                             fontSize: 12,
+                //
+                //                             color: Colors.white,
+                //                           ),
+                //                         ),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                 ),
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //                 // Add other text widgets or content if needed
+                //               ],
+                //             ),
+                //           ],
+                //         ),
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //       ),
+                //
+                //     ),
+                //     Expanded(
+                //       child: Container(
+                //         margin: EdgeInsets.only(top: 0, bottom: 0, right: 20, left: 0), // Adjust margin for the paddings
+                //         padding: EdgeInsets.all(20), // Adjust padding for the entire content
+                //         decoration: BoxDecoration(
+                //           color: Color(0xffD8D8D8).withOpacity(0.2), // Set your desired box color
+                //           borderRadius: BorderRadius.circular(20), // Optional: Add border radius
+                //         ),
+                //         child: Column(
+                //           children: [
+                //             Row(
+                //               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: <Widget>[
+                //                 Padding(
+                //                   padding: const EdgeInsets.only(left: 0, bottom: 10),
+                //                   child: Container(
+                //                     decoration: BoxDecoration(
+                //                       boxShadow: [
+                //                         BoxShadow(
+                //                           color: Colors.white.withOpacity(0.2), // shadow color
+                //                           spreadRadius: 0, // spread radius
+                //                           blurRadius: 7, // blur radius
+                //                           offset: Offset(0, 4), // changes position of shadow
+                //                         ),
+                //                       ],
+                //                     ),
+                //                     child: Image.asset(
+                //                       'assets/volume.png',
+                //                       width: 40,
+                //                     ),
+                //                   ),
+                //                 ),
+                //
+                //
+                //                 // Add other text widgets or content if needed
+                //               ],
+                //             ),
+                //
+                //             Row(
+                //               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: <Widget>[
+                //                 Flexible(
+                //                   // padding: const EdgeInsets.only(left: 0.0, top: 10),
+                //                   child: Column(
+                //                     children: [
+                //                       Text(
+                //                         '60% Noise',
+                //                         style: TextStyle(
+                //                           fontSize: 20,
+                //                           fontWeight: FontWeight.bold,
+                //                           color: Colors.white,
+                //                         ),
+                //                       ),
+                //
+                //                       Container(
+                //                         width: 130,
+                //                         child: Text(
+                //                           'Reduce noise by taking necessary steps',
+                //                           style: TextStyle(
+                //                             fontSize: 12,
+                //
+                //                             color: Colors.white,
+                //                           ),
+                //                         ),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                 ),
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //                 // Add other text widgets or content if needed
+                //               ],
+                //             ),
+                //           ],
+                //         ),
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //
+                //       ),
+                //
+                //     ),
+                //   ],
+                // ),
 
                 SizedBox(
                   height: 20,
@@ -449,115 +455,109 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
                   height: 20,
                 ),
 
-          // Container(
-          //   margin: EdgeInsets.only(top: 0, bottom: 20, right: 20, left: 20),
-          //   padding: EdgeInsets.all(15),
-          //   decoration: BoxDecoration(
-          //     color: Color(0xff8650F6).withOpacity(0.6),
-          //     borderRadius: BorderRadius.circular(20),
-          //   ),
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: <Widget>[
-          //       Row(
-          //         children: [
-          //           Expanded(
-          //             child: Column(
-          //               crossAxisAlignment: CrossAxisAlignment.start,
-          //               children: [
-          //                 Row(
-          //                   children: [
-          //
-          //                     Padding(
-          //                       padding: const EdgeInsets.only(left: 10.0),
-          //                       child: Column(
-          //                         children: [
-          //                           Padding(
-          //                             padding: const EdgeInsets.only(right: 130.0, bottom: 0),
-          //                             child: Text(
-          //                               'Fall asleep',
-          //                               style: TextStyle(
-          //                                 fontSize: 18,
-          //                                 fontWeight: FontWeight.bold,
-          //                                 color: Colors.white,
-          //                               ),
-          //                             ),
-          //                           ),
-          //                           Container(
-          //                             width: 220,
-          //                             // width: MediaQuery.of(context).size.width - 170,  // Adjust the width based on your layout
-          //                             child: Text(
-          //                               'Take breathing exercise',
-          //                               style: TextStyle(
-          //                                 fontSize: 20,
-          //                                 color: Colors.white,
-          //                                 fontWeight: FontWeight.bold,
-          //                               ),
-          //                               overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
-          //                               maxLines: 2,  // Adjust the number of lines to show
-          //                             ),
-          //                           ),
-          //
-          //                           Padding(
-          //                             padding: const EdgeInsets.only(top: 10, right: 90),
-          //                             child: Container(
-          //                               padding: EdgeInsets.only(left: 20, right: 20,bottom: 5, top: 5),
-          //                               decoration: BoxDecoration(
-          //                                 color: Colors.white,
-          //                                 borderRadius: BorderRadius.circular(10),
-          //                               ),
-          //
-          //                               child: Column(
-          //                                 children: [
-          //                                   Text(
-          //                                     'Get started',
-          //                                     style: TextStyle(
-          //                                       fontSize: 18,
-          //                                       // fontWeight: FontWeight.bold,
-          //                                       color: Color(0xff8650F6),
-          //                                     ),
-          //                                   ),
-          //
-          //
-          //                                 ],
-          //                               ),
-          //
-          //
-          //                             ),
-          //                           ),
-          //                         ],
-          //                       ),
-          //                     ),
-          //                   ],
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //
-          //
-          //         ],
-          //       ),
-          //       // SizedBox(height: 10),
-          //     ],
-          //   ),
-          // ),
-
-
           Container(
-            // height: 700,
-            child: ListView.builder(
+            margin: EdgeInsets.only(top: 0, bottom: 20, right: 20, left: 20),
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Color(0xff8650F6).withOpacity(0.6),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
 
-              physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
-              shrinkWrap: true,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 130.0, bottom: 0),
+                                      child: Text(
+                                        'Fall asleep',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      // width: MediaQuery.of(context).size.width - 170,  // Adjust the width based on your layout
+                                      child: Text(
+                                        'Meditate for a moment',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
+                                        maxLines: 2,  // Adjust the number of lines to show
+                                      ),
+                                    ),
 
-              itemCount: 4, // Set the number of containers you want to display
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
+                                    GestureDetector(
+                                      onTap:(){
+                                        controller.onMeditateTap();
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 10, right: 90),
+                                        child: Container(
+                                          padding: EdgeInsets.only(left: 20, right: 20,bottom: 5, top: 5),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Go to Library',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  // fontWeight: FontWeight.bold,
+                                                  color: Color(0xff8650F6),
+                                                ),
+                                              ),
+
+
+                                            ],
+                                          ),
+
+
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+
+                  ],
+                ),
+                // SizedBox(height: 10),
+              ],
+            ),
+          ),
+                Container(
                   margin: EdgeInsets.only(top: 0, bottom: 20, right: 20, left: 20),
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Color(0xffD8D8D8).withOpacity(0.2),
+                    color:Color(0xffD8D8D8).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
@@ -589,45 +589,50 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
                                             ),
                                           ),
                                           Container(
-                                            width:220,
+                                            width: 220,
                                             // width: MediaQuery.of(context).size.width - 170,  // Adjust the width based on your layout
                                             child: Text(
-                                              'Listen soothing music',
+                                              'Listen to soothing music',
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                               overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
-                                              maxLines: 4,  // Adjust the number of lines to show
+                                              maxLines: 2,  // Adjust the number of lines to show
                                             ),
                                           ),
 
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 10, right: 90),
-                                            child: Container(
-                                              padding: EdgeInsets.only(left: 20, right: 20,bottom: 5, top: 5),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.circular(10),
-                                              ),
+                                          GestureDetector(
+                                            onTap:(){
+                                              controller.onMusicTap();
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 10, right: 90),
+                                              child: Container(
+                                                padding: EdgeInsets.only(left: 20, right: 20,bottom: 5, top: 5),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
 
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                    'Go to library',
-                                                    style: TextStyle(
-                                                      fontSize: 18,
-                                                      // fontWeight: FontWeight.bold,
-                                                      color: Color(0xff8650F6),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      'Go to library',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        // fontWeight: FontWeight.bold,
+                                                        color: Color(0xff8650F6),
+                                                      ),
                                                     ),
-                                                  ),
 
 
-                                                ],
+                                                  ],
+                                                ),
+
+
                                               ),
-
-
                                             ),
                                           ),
                                         ],
@@ -642,13 +647,221 @@ class AntisleepScreen extends GetView<AntisleepScreenController>{
 
                         ],
                       ),
-                      SizedBox(height: 10),
+                      // SizedBox(height: 10),
                     ],
                   ),
-                );
-              },
-            ),
-          ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 0, bottom: 20, right: 20, left: 20),
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color:Color(0xffD8D8D8).withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(right: 150.0, bottom: 0),
+                                            child: Text(
+                                              'Stay relaxed',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 250,
+                                            // width: MediaQuery.of(context).size.width - 170,  // Adjust the width based on your layout
+                                            child: Text(
+                                              'Listen to sleep sounds',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
+                                              maxLines: 2,  // Adjust the number of lines to show
+                                            ),
+                                          ),
+
+                                          GestureDetector(
+
+                                            onTap:(){
+                                              controller.onSoundTap();
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 10, right: 110),
+                                              child: Container(
+                                                padding: EdgeInsets.only(left: 20, right: 20,bottom: 5, top: 5),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      'Go to library',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        // fontWeight: FontWeight.bold,
+                                                        color: Color(0xff8650F6),
+                                                      ),
+                                                    ),
+
+
+                                                  ],
+                                                ),
+
+
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                      // SizedBox(height: 10),
+                    ],
+                  ),
+                ),
+
+               
+          // Container(
+          //   // height: 700,
+          //   child: ListView.builder(
+          //
+          //     physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
+          //     shrinkWrap: true,
+          //
+          //     itemCount: 3, // Set the number of containers you want to display
+          //     itemBuilder: (BuildContext context, int index) {
+          //       return Container(
+          //         margin: EdgeInsets.only(top: 0, bottom: 20, right: 20, left: 20),
+          //         padding: EdgeInsets.all(15),
+          //         decoration: BoxDecoration(
+          //           color: Color(0xffD8D8D8).withOpacity(0.2),
+          //           borderRadius: BorderRadius.circular(20),
+          //         ),
+          //         child: Column(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           crossAxisAlignment: CrossAxisAlignment.center,
+          //           children: <Widget>[
+          //             Row(
+          //               children: [
+          //                 Expanded(
+          //                   child: Column(
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                     children: [
+          //                       Row(
+          //                         children: [
+          //
+          //                           Padding(
+          //                             padding: const EdgeInsets.only(left: 10.0),
+          //                             child: Column(
+          //                               children: [
+          //                                 Padding(
+          //                                   padding: const EdgeInsets.only(right: 130.0, bottom: 0),
+          //                                   child: Text(
+          //                                     'Fall asleep',
+          //                                     style: TextStyle(
+          //                                       fontSize: 18,
+          //                                       fontWeight: FontWeight.bold,
+          //                                       color: Colors.white,
+          //                                     ),
+          //                                   ),
+          //                                 ),
+          //                                 Container(
+          //                                   width:220,
+          //                                   // width: MediaQuery.of(context).size.width - 170,  // Adjust the width based on your layout
+          //                                   child: Text(
+          //                                     'Listen soothing music',
+          //                                     style: TextStyle(
+          //                                       fontSize: 20,
+          //                                       color: Colors.white,
+          //                                       fontWeight: FontWeight.bold,
+          //                                     ),
+          //                                     overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
+          //                                     maxLines: 4,  // Adjust the number of lines to show
+          //                                   ),
+          //                                 ),
+          //
+          //                                 GestureDetector(
+          //                                   onTap:(){
+          //                                     controller.onMusicTap();
+          //                                   },
+          //                                   child: Padding(
+          //                                     padding: const EdgeInsets.only(top: 10, right: 90),
+          //                                     child: Container(
+          //                                       padding: EdgeInsets.only(left: 20, right: 20,bottom: 5, top: 5),
+          //                                       decoration: BoxDecoration(
+          //                                         color: Colors.white,
+          //                                         borderRadius: BorderRadius.circular(10),
+          //                                       ),
+          //
+          //                                       child: Column(
+          //                                         children: [
+          //                                           Text(
+          //                                             'Go to library',
+          //                                             style: TextStyle(
+          //                                               fontSize: 18,
+          //                                               // fontWeight: FontWeight.bold,
+          //                                               color: Color(0xff8650F6),
+          //                                             ),
+          //                                           ),
+          //
+          //
+          //                                         ],
+          //                                       ),
+          //
+          //
+          //                                     ),
+          //                                   ),
+          //                                 ),
+          //                               ],
+          //                             ),
+          //                           ),
+          //                         ],
+          //                       ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //
+          //
+          //               ],
+          //             ),
+          //             SizedBox(height: 10),
+          //           ],
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
 
 
 

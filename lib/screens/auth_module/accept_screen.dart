@@ -67,7 +67,7 @@ class AcceptScreen extends GetView<AcceptScreenController>{
                       child: ElevatedButton(
 
                         onPressed: () {
-                          Get.back();
+                          controller.onLoginTap();
                         },
                         style: ElevatedButton.styleFrom(
 

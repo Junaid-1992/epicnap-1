@@ -65,7 +65,7 @@ class SetPassScreen extends GetView<SetPassScreenController>{
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 50,),
-                    child:CustomTextField(controller: controller.nameController,
+                    child:CustomTextField(controller: controller.passwordController,
                         isPassword: true,
                         showPassword: true,
                         hintText: "Create a password"
@@ -79,7 +79,7 @@ class SetPassScreen extends GetView<SetPassScreenController>{
                   Padding(
                     padding: EdgeInsets.only(right: 40,left: 40, top:50 ),
                     child: CustomPrimaryButton(buttonText: "Next", onButtonPressed: (){
-                      controller.onLoginTap();
+                      controller.register();
                     },
                       buttonColor: Color(0xff8650F6),
                     ),

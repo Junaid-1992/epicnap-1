@@ -1,5 +1,4 @@
 
-import 'package:first_project/controller/home_module_controller/edit_profile_screen_controller.dart';
 import 'package:first_project/controller/home_module_controller/influencer_dashoard_controller.dart';
 
 import 'package:get/get.dart';
@@ -10,10 +9,9 @@ class InfluencerHomeController  extends GetxController{
 
    InfluencerDashboardScreenController influencerDashboardScreenController = Get.find<InfluencerDashboardScreenController>();
 
-  EditProfileScreenController editProfileScreenController = Get.find<EditProfileScreenController>();
 
   void onEditTap(){
-    Get.toNamed(AppConstant.kEditProfileScreen);
+    // Get.toNamed(AppConstant.kEditProfileScreen);
     // Get.offNamed(AppConstant.kEditProfileScreen);
   }
 

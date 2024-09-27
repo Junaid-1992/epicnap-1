@@ -90,8 +90,6 @@ class EmailScreen extends GetView<EmailScreenController>{
                   ),
 
 
-
-
                   Padding(
                     padding: EdgeInsets.only(right: 40,left: 40, top:50 ),
                     child: CustomPrimaryButton(buttonText: "Continue", onButtonPressed: (){

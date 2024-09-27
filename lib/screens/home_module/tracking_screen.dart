@@ -10,6 +10,7 @@ import 'package:first_project/welcome.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../controller/auth_module_controller/name_screen_controller.dart';
 import '../custom_widgets/custom_textfield.dart';
@@ -59,12 +60,12 @@ class TrackingScreen extends GetView<TrackingScreenController>{
                             children: [
 
 
-                              Container(
-                                padding: EdgeInsets.only(left: 18.0,),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.back(); // Navigate back to the previous screen
-                                  },
+                              GestureDetector(
+                                onTap: (){
+                                  Get.back();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 18.0,),
                                   child: Image.asset(
                                     'assets/previous.png', // Replace with the path to your back icon image
                                     width: 15, // Adjust the width according to your design
@@ -99,31 +100,95 @@ class TrackingScreen extends GetView<TrackingScreenController>{
                 ),
             SizedBox(height: 20,),
 
-                Container(
-                  height: 300,
-                  width: 300,
+                Stack(
+                  children: [
+                    Container(
+                      height: 400,
+                      width: 400,
+                      padding: EdgeInsets.only(bottom: 30, left: 30, right:30),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/timechartnew.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 180,
 
-
-
-                  // padding: EdgeInsets.symmetric(horizontal: 40 , vertical: 40 ),
-                  padding: EdgeInsets.only(bottom: 30, left: 30, right:30),
-
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/timechart.png'),
-
-                      // fit: BoxFit.cover,
+                      left: 30,
+                      right: 30,
+                      child: Obx(
+                            () => Text(
+                          controller.elapsedTime,
+                          style: TextStyle(fontSize: 26, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
 
 
                     ),
-                  ),
+
+                    Positioned(
+                      bottom: 180,
+
+                      left: 30,
+                      right: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left:100.0, right: 100),
+                        child: ElevatedButton(
+                          onPressed: controller.startTimer,
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent, // Set the background color
+                            onPrimary: Colors.white, // Set the text color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5), // Set the border radius
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                          ),
+                          child: Text(''),
+                        ),
+                      ),
 
 
-
-
-
-
+                    ),
+                  ],
                 ),
+
+
+                // Container(
+                //   height: 400,
+                //   width: 400,
+                //
+                //
+                //
+                //   // padding: EdgeInsets.symmetric(horizontal: 40 , vertical: 40 ),
+                //   padding: EdgeInsets.only(bottom: 30, left: 30, right:30),
+                //
+                //   decoration: BoxDecoration(
+                //     image: DecorationImage(
+                //       image: AssetImage('assets/timechartnew.png'),
+                //
+                //       // fit: BoxFit.cover,
+                //
+                //
+                //     ),
+                //   ),
+                //
+                //
+                //
+                //
+                //
+                //
+                // ),
+                //
+                //
+                //               Obx(
+                //                                   () => Text(
+                //                                 controller.elapsedTime,
+                //                                 style: TextStyle(fontSize: 40, color: Colors.white),
+                //                               ),
+                //                             ),
                   SizedBox(height: 20,),
 
 
@@ -139,8 +204,21 @@ class TrackingScreen extends GetView<TrackingScreenController>{
 
                         ),
                       ),
+
                       Text(
-                        'Alarm 6:00 AM',
+                       'Alarm ',
+                        style: TextStyle(
+                          fontSize: 16,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+
+
+                      ),
+                      Text(
+                        controller.dashboardScreenController.timer.value != ''
+                            ? formatTime(controller.dashboardScreenController.timer.value)
+                            : '00:00',
                         style: TextStyle(
                           fontSize: 16,
                           // fontWeight: FontWeight.bold,
@@ -174,7 +252,9 @@ class TrackingScreen extends GetView<TrackingScreenController>{
                           ),
 
                           Text(
-                            '10:30 PM',
+                            controller.dashboardScreenController.bedtime.value != ''
+                                ? formatTime(controller.dashboardScreenController.bedtime.value)
+                                : '00:00',
                             style: TextStyle(
                               fontSize: 14,
                               // fontWeight: FontWeight.bold,
@@ -261,6 +341,11 @@ class TrackingScreen extends GetView<TrackingScreenController>{
                     ],
                   ),
                 ),
+                //
+                // Obx(() => Text(
+                //   'Elapsed Time: ${controller.seconds.value} seconds',
+                //   style: TextStyle(fontSize: 20),
+                // )),
 
                 SizedBox(height: 30,),
                 Row(
@@ -281,27 +366,60 @@ class TrackingScreen extends GetView<TrackingScreenController>{
 
                                 Flexible(
                                   // padding: const EdgeInsets.only(left: 0.0, top: 0),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(right:10.0),
-                                        child: Image.asset(
-                                          'assets/music.png', // Replace with the path to your back icon image
-                                          width: 25, // Adjust the width according to your design
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      controller.onMusicTap();
 
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(right:10.0),
+                                          child: Image.asset(
+                                            'assets/music.png', // Replace with the path to your back icon image
+                                            width: 25, // Adjust the width according to your design
+
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        'sleeping music playing',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff939393),
+
+                                        // Obx(
+                                        //       () => Text(
+                                        //     controller.elapsedTime,
+                                        //     style: TextStyle(fontSize: 40),
+                                        //   ),
+                                        // ),
+
+                                        // Obx(
+                                        //       () => Text(
+                                        //     controller._elapsedTime.value,
+                                        //     style: TextStyle(fontSize: 40),
+                                        //   ),
+                                        // ),
+
+                                        // Obx(() => Text(
+                                        //   'Elapsed Time: ${_formatDuration(controller.seconds.value)}',
+                                        //   style: TextStyle(fontSize: 20),
+                                        // )),
+
+                                                    // Obx(
+                                                    //       () => Text(
+                                                    //     controller.formattedTime,
+                                                    //     style: TextStyle(fontSize: 48.0),
+                                                    //   ),
+                                                    // ),
+
+                                        Text(
+                                          'sleeping music playing',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff939393),
+                                          ),
                                         ),
-                                      ),
 
 
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
 
@@ -333,17 +451,46 @@ class TrackingScreen extends GetView<TrackingScreenController>{
 
 
                 SizedBox(height: 40,),
-
+                SizedBox(width: 10),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: const EdgeInsets.only(left: 30.0 , right: 30),
+                  child: ElevatedButton(
+                    onPressed: controller.stopTimer,
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff8650F6), // Set the background color
+                      onPrimary: Colors.white, // Set the text color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5), // Set the border radius
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 20),
 
-                      horizontal: 30
+                    ),
+                    child: Text('Stop Tracking'),
                   ),
-                  child: CustomPrimaryButton(buttonText: 'Stop Tracking', onButtonPressed: (){
-                    controller.onRegisterTap();
-                  },buttonColor: Color(0xff8650F6),textColor: Colors.white,),
                 ),
 
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(
+                //
+                //       horizontal: 30
+                //   ),
+                //   child: CustomPrimaryButton(buttonText: 'Stop Tracking', onButtonPressed: (){
+                //     controller.stopTimer;
+                //   },buttonColor: Color(0xff8650F6),textColor: Colors.white,),
+                // ),
+
+
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 30),
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       controller.toggleTracking();
+                //     },
+                //     child: Obx(() => Text(
+                //       controller.isTracking.value ? 'Stop Tracking' : 'Start Tracking',
+                //     )),
+                //   ),
+                // ),
 
 
 
@@ -410,6 +557,19 @@ class TrackingScreen extends GetView<TrackingScreenController>{
         ),
       ),
     );
+  }
+
+
+  String formatTime(String timeString) {
+    final parsedTime = DateTime.parse('2022-01-01 $timeString');
+    return DateFormat('h:mm a').format(parsedTime);
+  }
+
+  String _formatDuration(int seconds) {
+    int hours = seconds ~/ 3600;
+    int minutes = (seconds % 3600) ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
 

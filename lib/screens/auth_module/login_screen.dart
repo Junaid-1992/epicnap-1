@@ -139,7 +139,7 @@ class LoginScreen extends GetView<LoginScreenController>{
                         ),
                       ),
                       CustomPrimaryButton(buttonText: "Sign In", onButtonPressed: (){
-                       controller.login();
+                       // controller.login();
                       },
                       buttonColor: CustomAppColor.kBlackColor,
                       ),

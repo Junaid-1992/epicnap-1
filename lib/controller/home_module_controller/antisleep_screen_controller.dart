@@ -21,4 +21,34 @@ class AntisleepScreenController  extends GetxController{
   void onInfluencersTap(){
     Get.toNamed(AppConstant.kInfluencerScreen);
   }
+
+
+  void onMusicTap(){
+    Get.toNamed(AppConstant.kLibraryScreen);
+  }
+
+
+  void onSoundTap(){
+    Get.toNamed(AppConstant.kSoundScreen);
+  }
+
+
+
+  void onMeditateTap(){
+    Get.toNamed(AppConstant.kMeditateScreen);
+  }
+
+  void onBreathTap(){
+    Get.toNamed(AppConstant.kExerciseScreen);
+  }
+
+  void onBedTimeTap(){
+    Get.toNamed(AppConstant.kBedtimeScreen);
+  }
+
+
+  void onAlarmTap(){
+    Get.toNamed(AppConstant.kAlarmScreen);
+  }
+
 }

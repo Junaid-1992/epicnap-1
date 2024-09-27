@@ -40,7 +40,7 @@ class WelcomeScreen extends GetView<WelcomeScreenController>{
 
                   child: Image.asset(
                     'assets/White version 1.png',
-                      width: 220,
+                    width: 220,
                   ),
                 ),
                 SizedBox(height: 30),
@@ -60,12 +60,15 @@ class WelcomeScreen extends GetView<WelcomeScreenController>{
                 ),
 
 
+
+
+                
                 Padding(
                   padding: EdgeInsets.only(right: 20,left: 20, top:30 ),
                   child: GestureDetector(
                     onTap: () {
                       // Add your functionality or navigation logic here
-                     controller.onLoginTap();
+                      controller.onLoginTap();
                     },
                     child: Container(
                       padding: EdgeInsets.only(left: 100, right: 100, top: 15, bottom: 15),
@@ -83,6 +86,30 @@ class WelcomeScreen extends GetView<WelcomeScreenController>{
                     ),
                   ),
                 ),
+
+
+            SizedBox(height: 20),
+            RichText(
+              text: TextSpan(
+                text: 'Already have an account? ',
+                style: TextStyle(color: Colors.white),
+                children: [
+                  TextSpan(
+                    text: 'Login',
+                    style: TextStyle(
+                      color: Color(0xff8650F6),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                      controller.onAlreadyLoginTap();
+                        // Add navigation logic to the login screen
+                      },
+                  ),
+                ],
+              ),
+            ),
+
 
 
               ],

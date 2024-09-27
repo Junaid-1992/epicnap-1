@@ -26,25 +26,51 @@ class DashboardScreenController  extends GetxController{
 
  RxString name = ''.obs;
 
+ RxString timer = ''.obs;
+ RxString bedtime = ''.obs;
+ RxString wakeup = ''.obs;
+ RxString bedtimes = ''.obs;
+ RxInt totallastsleep = 0.obs;
+ RxInt totalmonth = 0.obs;
+ RxInt totalweek = 0.obs;
+
  RxString email = ''.obs;
  RxString country = ''.obs;
 
  RxInt id = 0.obs;
+ RxInt sleepquality = 0.obs;
+ RxInt sleepmood = 0.obs;
+ RxInt sleepamount = 0.obs;
+ RxInt totalsleep = 0.obs;
+ RxInt totalsleepmonth = 0.obs;
  @override
 
- // void onInit() {
- //  super.onInit();
- //  print('abcd');
- //  final userModel = Get.arguments as UserModel; // Cast the arguments to UserModel
- //
- //  name.value = userModel.name ?? "Test Data";
- //
- //  email.value = userModel.email ?? "";
- //
- //  id.value = userModel.id;
- //
- //  print(id.value);
- // }
+ void onInit() {
+  super.onInit();
+  print('abcdssssssss');
+  final userModel = Get.arguments as UserModel; // Cast the arguments to UserModel
+
+  name.value = userModel.name ?? "Test Data";
+
+  timer.value = userModel.lastAlarmTimer ?? "00:00";
+  bedtime.value = userModel.lastbedtime ?? "00:00";
+
+  email.value = userModel.email ?? "";
+
+  id.value = userModel.id;
+  sleepquality.value = userModel.sleepquality ?? 0;
+  sleepmood.value = userModel.sleepmood ?? 0;
+  sleepamount.value = userModel.sleepamount ?? 0;
+  totalsleep.value = userModel.totalsleep ?? 0;
+  totalmonth.value = userModel.totalmonth ?? 0;
+  totalweek.value = userModel.totalweek ?? 0;
+  totalsleepmonth.value = userModel.totalsleepmonth ?? 0;
+  wakeup.value = userModel.wakeup ?? '0';
+
+  totallastsleep.value = userModel.totallastsleep ?? 0;
+
+  print('sleepamount ${sleepquality.value}');
+ }
 
 
  final List<Widget> listOfScreens=[

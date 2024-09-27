@@ -1,44 +1,55 @@
 
 import 'package:first_project/screens/auth_module/create_password_screen.dart';
+import 'package:first_project/screens/auth_module/gender_screen.dart';
 import 'package:first_project/screens/auth_module/introduction_screen.dart';
 import 'package:first_project/screens/auth_module/name_screen.dart';
 import 'package:first_project/screens/auth_module/newlogin_screen.dart';
 import 'package:first_project/screens/auth_module/otp_screen.dart';
 import 'package:first_project/screens/auth_module/setpass_screen.dart';
+import 'package:first_project/screens/auth_module/splash_screen.dart';
 import 'package:first_project/screens/auth_module/thank_screen.dart';
 import 'package:first_project/screens/auth_module/welcome_screen.dart';
 import 'package:first_project/screens/home_module/account_setting_screen.dart';
+import 'package:first_project/screens/home_module/addnotification_screen.dart';
 import 'package:first_project/screens/home_module/alarm_screen.dart';
 import 'package:first_project/screens/home_module/analysis_screen.dart';
 import 'package:first_project/screens/home_module/antisleep.dart';
 import 'package:first_project/screens/home_module/bedtime_screen.dart';
+import 'package:first_project/screens/home_module/breathing_screen.dart';
 import 'package:first_project/screens/home_module/category_setting_screen.dart';
 import 'package:first_project/screens/home_module/chat_screen.dart';
 import 'package:first_project/screens/home_module/course_screen.dart';
 import 'package:first_project/screens/home_module/dashboard_screen.dart';
-import 'package:first_project/screens/home_module/edit_profile_screen.dart';
+import 'package:first_project/screens/home_module/exercise_screen.dart';
 import 'package:first_project/screens/home_module/faq_screen.dart';
 import 'package:first_project/screens/home_module/history_screen.dart';
 import 'package:first_project/screens/home_module/influencer_dashboard_screen.dart';
 import 'package:first_project/screens/home_module/influencer_home_screen.dart';
 import 'package:first_project/screens/home_module/influencer_screen.dart';
+import 'package:first_project/screens/home_module/library_screen.dart';
 import 'package:first_project/screens/home_module/maindashboard_screen.dart';
+import 'package:first_project/screens/home_module/music_screen.dart';
+import 'package:first_project/screens/home_module/notification_screen.dart';
 import 'package:first_project/screens/home_module/payment_add_screen.dart';
 import 'package:first_project/screens/home_module/payment_screen.dart';
 import 'package:first_project/screens/home_module/payment_setting_screen.dart';
 import 'package:first_project/screens/home_module/paypalscreen.dart';
+import 'package:first_project/screens/home_module/prehistory_screen.dart';
 import 'package:first_project/screens/home_module/privacy_screen.dart';
 import 'package:first_project/screens/home_module/profile_screen.dart';
+import 'package:first_project/screens/home_module/research_screen.dart';
 import 'package:first_project/screens/home_module/setalarm_screen.dart';
 import 'package:first_project/screens/home_module/settings_screen.dart';
 import 'package:first_project/screens/home_module/single_course_screen.dart';
 import 'package:first_project/screens/home_module/single_influencer_screen.dart';
+import 'package:first_project/screens/home_module/sound_screen.dart';
 import 'package:first_project/screens/home_module/support_screen.dart';
 import 'package:first_project/screens/home_module/tracking_screen.dart';
 import 'package:first_project/utils/app_constant.dart';
 import 'package:first_project/utils/screen_bindings.dart';
 import 'package:get/get.dart';
 
+import '../model/user_model.dart';
 import '../screens/auth_module/accept_screen.dart';
 import '../screens/auth_module/age_screen.dart';
 import '../screens/auth_module/email_screen.dart';
@@ -46,6 +57,7 @@ import '../screens/auth_module/forget_screen.dart';
 import '../screens/auth_module/login_screen.dart';
 import '../screens/auth_module/register_screen.dart';
 import '../screens/home_module/home.dart';
+import '../screens/home_module/meditation_screen.dart';
 
 class RouteGenerator {
   static List<GetPage> getPages() {
@@ -54,6 +66,12 @@ class RouteGenerator {
       GetPage(
         name: AppConstant.kWelcomeScreen,
         page: () => const WelcomeScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kSplashScreen,
+        page: () => const SplashScreen(),
         binding: ScreenBindings(),
       ),
       GetPage(
@@ -126,11 +144,7 @@ class RouteGenerator {
         binding: ScreenBindings(),
       ),
 
-      GetPage(
-        name: AppConstant.kEditProfileScreen,
-        page: () => const EditProfileScreen(),
-        binding: ScreenBindings(),
-      ),
+
 
 
       GetPage(
@@ -282,6 +296,12 @@ class RouteGenerator {
         binding: ScreenBindings(),
       ),
 
+      // GetPage(
+      //   name: AppConstant.kAlarmScreen,
+      //   page: () => AlarmScreen(userModel: UserModel(), alarms: []), // Provide a default value for alarms
+      //   binding: ScreenBindings(),
+      // ),
+
       GetPage(
         name: AppConstant.kSetAlarmScreen,
         page: () => const SetAlarmScreen(),
@@ -316,6 +336,82 @@ class RouteGenerator {
       GetPage(
         name: AppConstant.kThankScreen,
         page: () => const ThankScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kBreathingScreen,
+        page: () => const BreathingScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kExerciseScreen,
+        page: () => const ExerciseScreen(),
+        binding: ScreenBindings(),
+      ),
+
+      GetPage(
+        name: AppConstant.kMUSICScreen,
+        page: () => const MusicScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kLibraryScreen,
+        page: () => const LibraryScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kGenderScreen,
+        page: () => const GenderScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kMeditateScreen,
+        page: () => const MeditateScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kSoundScreen,
+        page: () => const SoundScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+
+      GetPage(
+        name: AppConstant.kNotificationScreen,
+        page: () => const NotificationScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kResearchScreen,
+        page: () => const ResearchScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kPrehistoryScreen,
+        page: () => const PrehistoryScreen(),
+        binding: ScreenBindings(),
+      ),
+
+
+      GetPage(
+        name: AppConstant.kAddNotificationScreen,
+        page: () => const AddNotificationScreen(),
         binding: ScreenBindings(),
       ),
 

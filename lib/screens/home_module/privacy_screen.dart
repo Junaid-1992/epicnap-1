@@ -48,12 +48,12 @@ class PrivacyScreen extends GetView<PrivacyScreenController>{
                 SizedBox(height: 20,),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left:10.0),
-                      child: GestureDetector(
-                        onTap:(){
-                          Get.back();
-                        },
+                    GestureDetector(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left:20.0),
                         child: Image.asset(
                           'assets/previous.png',
                           width: 25,
@@ -64,7 +64,7 @@ class PrivacyScreen extends GetView<PrivacyScreenController>{
                     Expanded(
                       child: Container(
                         width: 300,
-                        padding: const EdgeInsets.only(right: 25.0),
+                        padding: const EdgeInsets.only(right: 35.0),
                         child: Center(
                           child: Text(
                             'Terms of Use',
@@ -562,14 +562,21 @@ class PrivacyScreen extends GetView<PrivacyScreenController>{
 
                       SizedBox(height: 10,),
 
-                      Text(
-                        'The collected data is used in the following ways:',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                        overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
-                        maxLines: 6,  // Adjust the number of lines to show
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'The collected data is used in the following ways:',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
+                            maxLines: 6,  // Adjust the number of lines to show
+                          ),
+                        ],
                       ),
 
                       SizedBox(height: 10,),
@@ -725,14 +732,19 @@ class PrivacyScreen extends GetView<PrivacyScreenController>{
 
                       SizedBox(height: 10,),
 
-                      Text(
-                        'Access the personal information we hold about you.',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                        overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
-                        maxLines: 6,  // Adjust the number of lines to show
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Access the personal information we hold about you.',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.ellipsis,  // Show ellipsis (...) if the text overflows
+                            maxLines: 6,  // Adjust the number of lines to show
+                          ),
+                        ],
                       ),
 
 

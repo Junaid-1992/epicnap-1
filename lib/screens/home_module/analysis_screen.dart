@@ -1,4 +1,3 @@
-import 'package:first_project/controller/auth_module_controller/analysis_screen_controller.dart';
 import 'package:first_project/controller/auth_module_controller/welcome_screen_controller.dart';
 import 'package:first_project/screens/custom_widgets/custom_primary_button.dart';
 import 'package:first_project/utils/app_colors.dart';
@@ -7,12 +6,18 @@ import 'package:first_project/welcome.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import '../../controller/auth_module_controller/analysis_screen_controller.dart';
+import '../../model/user_model.dart';
 
 class AnalysisScreen extends GetView<AnalysisScreenController>{
   const AnalysisScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AnalysisScreenController controller = Get.put(AnalysisScreenController());
+    UserModel? userModel = Get.arguments as UserModel?;
     bool isSwitched = false;
     return Scaffold(
       body: Container(
@@ -42,40 +47,63 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                     child: Column(
                       children: [
 
+
+
                         Row(
                           children: [
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 20.0, top: 10),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              '12 October, 2023',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
+                                  GestureDetector(
 
-                                            Text(
-                                              'Sleep analysis',
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
+                                    onTap: (){
+                                      // Get.back();
+                                      controller.onDashboard();
+                                    },
+                                    child: Row(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: (){
+                                            // Get.back();
+                                            controller.onDashboard();
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(left: 20.0,),
+                                            child: Image.asset(
+                                              'assets/previous.png', // Replace with the path to your back icon image
+                                              width: 15, // Adjust the width according to your design
+
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 30.0, top: 10),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                '12 October, 2023',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
 
-                                    ],
+                                              Text(
+                                                'Sleep analysis',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
                                   ),
                                   // Add other text widgets if needed
                                 ],
@@ -83,10 +111,15 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 20.0, top: 10),
-                              child: Image.asset(
-                                'assets/top.png',
-                                width: 50,
+                              child: GestureDetector(
+                                // onTap:(){
+                                //   controller.onbackTap();
+                                // },
+                                child: Image.asset(
+                                  'assets/top.png',
+                                  width: 50,
 
+                                ),
                               ),
                             ),
                           ],
@@ -103,22 +136,7 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                   ),
                 ),
 
-                // Expanded(
-                //   flex: 1,
-                //
-                //   child: Container(
-                //     color: Color(0xFF161D34),
-                //
-                //
-                //     child: Image.asset(
-                //       'assets/Group 36730.png',
-                //       width: 250,
-                //       height: 250,
-                //     ),
-                //
-                //   ),
-                //
-                // ),
+
                 Expanded(
                 
                 
@@ -196,7 +214,12 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                                                 child: Column(
                                                   children: [
                                                     Text(
-                                                      '10 : PM',
+                                                      // '10 : PM',
+                                                      // userModel !=null ?  formatTime(userModel!.lastbedtime):'0:00',
+
+                                                      controller.dashboardScreenController.bedtime.value != ''
+                                                          ? formatTime(controller.dashboardScreenController.bedtime.value)
+                                                          : '00:00',
                                                       style: TextStyle(
                                                         fontSize: 20,
                                                         fontWeight: FontWeight.bold,
@@ -215,16 +238,6 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                                                   ],
                                                 ),
                                               ),
-
-
-
-
-
-
-
-
-
-
 
 
                                               // Add other text widgets or content if needed
@@ -311,25 +324,11 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
 
 
 
-
-
-
-
-
-
-
-
-
                                               // Add other text widgets or content if needed
                                             ],
                                           ),
                                         ],
                                       ),
-
-
-
-
-
 
 
 
@@ -408,26 +407,11 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                                               ),
 
 
-
-
-
-
-
-
-
-
-
-
                                               // Add other text widgets or content if needed
                                             ],
                                           ),
                                         ],
                                       ),
-
-
-
-
-
 
 
 
@@ -500,28 +484,11 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                                                 ),
                                               ),
 
-
-
-
-
-
-
-
-
-
-
-
                                               // Add other text widgets or content if needed
                                             ],
                                           ),
                                         ],
                                       ),
-
-
-
-
-
-
 
 
                                     ),
@@ -537,11 +504,12 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
                               const SizedBox(height: 20),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                
+
                                     horizontal: 30
                                 ),
                                 child: CustomPrimaryButton(buttonText: 'Set your bedtime routine', onButtonPressed: (){
-                                  controller.onRegisterTap();
+                                  // controller.onRegisterTap();
+                                  Get.put(AnalysisScreenController()).onRegisterTap();
                                 },buttonColor: Color(0xff8650F6),textColor: Colors.white,),
                               ),// Add some space between the buttons
 
@@ -569,5 +537,8 @@ class AnalysisScreen extends GetView<AnalysisScreenController>{
     );
   }
 
-
+  String formatTime(String timeString) {
+    final parsedTime = DateTime.parse('2022-01-01 $timeString');
+    return DateFormat('h:mm a').format(parsedTime);
+  }
 }

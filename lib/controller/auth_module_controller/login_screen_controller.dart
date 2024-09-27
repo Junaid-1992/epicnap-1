@@ -19,24 +19,24 @@ class LoginScreenController extends GetxController{
   void onRegisterTap(){
     Get.toNamed(AppConstant.kRegisterScreen);
   }
-  Future<void> login() async{
-    progressDialog.showDialog();
-    UserModel userModel=await userServices.loginUser(email: emailController.text, password: passwordController.text);
-    print(userModel.toString());
-    if(userModel.type=="influencer"){
-      progressDialog.dismissDialog();
-
-      Get.offNamed(AppConstant.kInfluencerDashboardScreen,arguments: userModel);
-
-    }
-    else if(userModel.type =="user"){
-      progressDialog.dismissDialog();
-      Get.offNamed(AppConstant.kDashboardScreen,arguments: userModel);
-    }
-    else{
-      progressDialog.dismissDialog();
-    }
-  }
+  // Future<void> login() async{
+  //   progressDialog.showDialog();
+  //   UserModel userModel=await userServices.loginUser(email: emailController.text, password: passwordController.text);
+  //   print(userModel.toString());
+  //   if(userModel.type=="influencer"){
+  //     progressDialog.dismissDialog();
+  //
+  //     Get.offNamed(AppConstant.kInfluencerDashboardScreen,arguments: userModel);
+  //
+  //   }
+  //   else if(userModel.type =="user"){
+  //     progressDialog.dismissDialog();
+  //     Get.offNamed(AppConstant.kDashboardScreen,arguments: userModel);
+  //   }
+  //   else{
+  //     progressDialog.dismissDialog();
+  //   }
+  // }
   void onForgotTap(){
     Get.toNamed(AppConstant.kForgetScreen);
   }

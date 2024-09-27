@@ -175,7 +175,7 @@ class RegisterScreen extends GetView<RegisterScreenController>{
         
         
                     CustomPrimaryButton(buttonText: "Create Account", onButtonPressed: (){
-                      controller.register();
+                      // controller.register();
                     },
                       buttonColor: CustomAppColor.kBlackColor,
                     ),

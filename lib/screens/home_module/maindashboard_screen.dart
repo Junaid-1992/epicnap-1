@@ -1,5 +1,4 @@
 
-
 import 'package:first_project/controller/auth_module_controller/setpass_screen_controller.dart';
 import 'package:first_project/controller/auth_module_controller/welcome_screen_controller.dart';
 import 'package:first_project/controller/home_module_controller/maindashboard_screen_controller.dart';
@@ -14,15 +13,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../../controller/auth_module_controller/name_screen_controller.dart';
 import '../custom_widgets/custom_textfield.dart';
+import '../custom_widgets/prograssdialog.dart';
 
 class MainDashboradScreen extends GetView<MainDashboardScreenController>{
 
   const MainDashboradScreen({Key? key}) : super(key: key);
   void _showSleepTrackingModal(BuildContext context) {
+    ProgressDialog progressDialog = ProgressDialog();
     print('sssssss');
     showModalBottomSheet(
       context: context,
@@ -36,7 +39,7 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
             width: 400,
             decoration: BoxDecoration(
               color: Colors.black,
-          
+
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0),
@@ -62,15 +65,15 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                     ),
                   ],
                 ),
-          
+
                 SizedBox(height: 20,),
-          
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'How are you feeling?',
-          
+                      'How was your feeling?',
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -80,25 +83,68 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                   ],
                 ),
                 SizedBox(height: 20,),
-          
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                   Image.asset(
-                     'assets/icons.png',
-                         width:300,
-                   )
-                  ],
-                ),
-          
+            Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(controller.imagePaths.length, (index) {
+                return GestureDetector(
+                  onTap: () {
+                    controller.selectImage(index);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: controller.selectedIndex.value == index ? Colors.blue : Colors.transparent,
+                        width: 2.0,
+                      ),
+                    ),
+                    padding: EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      controller.imagePaths[index],
+                      width: 50,
+                    ),
+                  ),
+                );
+              }),
+            )),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //    Image.asset(
+                //      'assets/emo.png',
+                //          width:50,
+                //    ),
+                //
+                //     Image.asset(
+                //       'assets/emo.png',
+                //       width:50,
+                //     ),
+                //
+                //     Image.asset(
+                //       'assets/emo.png',
+                //       width:50,
+                //     ),
+                //
+                //     Image.asset(
+                //       'assets/emo.png',
+                //       width:50,
+                //     ),
+                //
+                //     Image.asset(
+                //       'assets/emo.png',
+                //       width:50,
+                //     )
+                //   ],
+                // ),
+
                 SizedBox(height: 20,),
-          
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       'How you’ll rate your sleep?',
-          
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -108,23 +154,41 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                   ],
                 ),
                 SizedBox(height: 20,),
-          
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/stars.png',
-                      width:200,
-                    )
-                  ],
-                ),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Image.asset(
+                //       'assets/stars.png',
+                //       width:200,
+                //     )
+                //   ],
+                // ),
+
+            Obx(()=>
+               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(5, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      controller.setRating(index + 1); // Index starts from 0, so add 1 to get the actual rating value
+                    },
+                    child: Icon(
+                      index < controller.selectedStars.value ? Icons.star : Icons.star_border,
+                      color: index < controller.selectedStars.value ? Colors.white : Colors.grey,
+                      size: 40,
+                    ),
+                  );
+                }),
+              ),
+            ),
                 SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       'Are you satisfied with your bedtime last night?',
-          
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -134,23 +198,39 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                   ],
                 ),
                 SizedBox(height: 20,),
-          
-                Row(
+
+
+
+                Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/thumbs.png',
-                      width:120,
-                    )
-                  ],
-                ),
+                  children: List.generate(controller.likeimage.length, (index) {
+                    return GestureDetector(
+                      onTap: () {
+                        controller.selectImage2(index);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: controller.selectedIndex2.value == index ? Colors.blue : Colors.transparent,
+                            width: 2.0,
+                          ),
+                        ),
+                        padding: EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          controller.likeimage[index],
+                          width: 50,
+                        ),
+                      ),
+                    );
+                  }),
+                )),
                 SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       'Keep a note about your sleep',
-          
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -164,7 +244,7 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                 Padding(
                   padding: const EdgeInsets.only(top: 0),
                   child: CustomTextField(
-                    // controller: controller.ageController,
+                    controller: controller.noteController,
                     hintText: "This was a nice sleeping session",
                   ),
                 ),
@@ -176,7 +256,10 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                   child: CustomPrimaryButton(
                     buttonText: "Submit",
                     onButtonPressed: () {
-                      // controller.onLoginTap();
+                      controller.getUserMode();
+                      // progressDialog.showDialog();
+                      // Navigator.pop(context);
+                      // progressDialog.dismissDialog();
                     },
                     buttonColor: Color(0xff8650F6),
                   ),
@@ -201,7 +284,7 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
 
                 SizedBox(height: 20,),
               ],
-          
+
               // Add your modal content here
             ),
           ),
@@ -213,9 +296,54 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showSleepTrackingModal(context);
+    String currentDate = DateFormat('d').format(DateTime.now());
+
+    DateTime now = DateTime.now();
+
+    // Format the date using DateFormat
+    String formattedDate = DateFormat('dd-MMM-yyyy').format(now);
+
+    final DateTime _lastShownTime = DateTime.now();
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   if (DateTime.now().difference(_lastShownTime) >= Duration(minutes: 1)) {
+    //     _showSleepTrackingModal(context);
+    //   }
+    // });
+
+
+
+    Future<DateTime?> _getStoredTime() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      // Replace 'storedTimeKey' with the key you used to store the time
+      String? storedTimeString = prefs.getString('currentTime');
+      print('time $storedTimeString');
+      if (storedTimeString != null) {
+        return DateTime.parse(storedTimeString);
+      }
+      return null;
+    }
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      DateTime? storedTime = await _getStoredTime();
+      if (storedTime != null &&
+          DateTime.now().difference(storedTime) >= Duration(minutes: 10)) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String currentTime = DateTime.now().toString();
+        await prefs.setString('currentTime', currentTime);
+        // _showSleepTrackingModal(context);
+
+
+      }
     });
+    // WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    //   DateTime? storedTime = await _getStoredTime();
+    //   if (storedTime != null && storedTime.isBefore(DateTime.now())) {
+    //
+    //     _showSleepTrackingModal(context);
+    //   }
+    // });
+
+
     bool isSwitched = false;
 
 
@@ -253,12 +381,16 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                                 padding: const EdgeInsets.only(left: 20.0),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      'Hello Jessey!',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                    Obx(()=>
+                                Text(
+                                        // 'Hello Jessey!',
+
+                                  'Hello ${controller.dashboardScreenController.name.value}',
+                                       style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
 
@@ -289,14 +421,17 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
+                      padding: const EdgeInsets.only(right: 30.0),
                       child: GestureDetector(
                         onTap:(){
-                          controller.onProfileTap();
+                          controller.onNotificationTap();
+                          // controller.onProfileTap();
+
+
 
                         },
                         child: Image.asset(
-                          'assets/top.png',
+                          'assets/bell.png',
                           width: 50,
 
                         ),
@@ -306,30 +441,135 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                 ),
 
 
-                Container(
-                  height: 200,
+                // GestureDetector(
+                //   onTap:(){
+                //     controller.ontrackingTap();
+                //   },
+                //   child: Container(
+                //     height: 200,
+                //
+                //
+                //     // padding: EdgeInsets.symmetric(horizontal: 40 , vertical: 40 ),
+                //     padding: EdgeInsets.only(bottom: 30, left: 30, right:30),
+                //
+                //     decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //         image: AssetImage('assets/blank.png'),
+                //         fit: BoxFit.cover,
+                //
+                //
+                //       ),
+                //     ),
+                //
+                //     child: Container(
+                //       padding: EdgeInsets.only(top: 30),
+                //
+                //       // Adjust the left value as needed
+                //       // child: buildCountry(),
+                //     ),
+                //   ),
+                // ),
 
 
-                  // padding: EdgeInsets.symmetric(horizontal: 40 , vertical: 40 ),
-                  padding: EdgeInsets.only(bottom: 30, left: 30, right:30),
+                GestureDetector(
+                  onTap: () {
+                    controller.ontrackingTap();
+                  },
 
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/purple.png'),
-                      fit: BoxFit.cover,
-
-
+                  child: Container(
+                    height: 200,
+                    padding: EdgeInsets.only(bottom: 30, left: 30, right: 30),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/blank.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                child: Text(
+                                  'You have slept  ${controller.dashboardScreenController.totallastsleep.toString()} hours',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Text(
+                                'last Night',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
-                  child: Container(
-                    padding: EdgeInsets.only(top: 30),
-
-                    // Adjust the left value as needed
-                    // child: buildCountry(),
-                  ),
+                  // child: Container(
+                  //   height: 200,
+                  //   padding: EdgeInsets.only(bottom: 30, left: 30, right: 30),
+                  //   decoration: BoxDecoration(
+                  //     image: DecorationImage(
+                  //       image: AssetImage('assets/blank.png'),
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  //   child: Stack(
+                  //     children: [
+                  //       Positioned(
+                  //         top: 60, // Adjust the top position of the text
+                  //         // Adjust the left position of the text
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.only(left:20.0, right: 20),
+                  //           child: Text(
+                  //             'You have slept  ${controller.dashboardScreenController.totallastsleep.toString()} hours',
+                  //
+                  //             style: TextStyle(
+                  //               fontSize: 24,
+                  //               fontWeight: FontWeight.bold,
+                  //               color: Colors.white,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //
+                  //
+                  //       ),
+                  //
+                  //       Positioned(
+                  //         top: 100, // Adjust the top position of the text
+                  //          // Adjust the left position of the text
+                  //         child: Text(
+                  //           'last Night',
+                  //
+                  //           style: TextStyle(
+                  //             fontSize: 24,
+                  //             fontWeight: FontWeight.bold,
+                  //             color: Colors.white,
+                  //           ),
+                  //         ),
+                  //
+                  //
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ),
-            Container(
+
+                Container(
               margin: EdgeInsets.only(top: 0, bottom: 0,right: 20,left: 20), // Adjust margin for the paddings
               padding: EdgeInsets.all(20), // Adjust padding for the entire content
               decoration: BoxDecoration(
@@ -348,88 +588,129 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Container(
+                            GestureDetector(
+                              onTap:(){
+                                controller.onalarmTap();
+            },
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Container(
 
-                          decoration: BoxDecoration(
-                          boxShadow: [
-                          BoxShadow(
-                          color: Colors.white.withOpacity(0.1), // shadow color
-                        spreadRadius: 0, // spread radius
-                        blurRadius: 15, // blur radius
-                        offset: Offset(0, 4), // changes position of shadow
-                      ),
-                      ],
-                    ),
-                    child: Image.asset(
-                      'assets/clock.png',
-                      width: 70,
+                                                        decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                        BoxShadow(
+                                                        color: Colors.white.withOpacity(0.1), // shadow color
+                                                      spreadRadius: 0, // spread radius
+                                                      blurRadius: 15, // blur radius
+                                                      offset: Offset(0, 4), // changes position of shadow
+                                                    ),
+                                                    ],
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/clock.png',
+                                                    width: 70,
 
 
-                    ),
-                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        '7 : 30 PM',
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-
-                                      Text(
-                                        '1 hour later',
-                                        style: TextStyle(
-                                          fontSize: 18,
-
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
+                                                  ),
+                                                ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Column(
+                                      children: [
+                                        Obx( ()=>
+                                           Text(
 
-                              ],
+
+
+                                            controller.bedTimeScreenController.alarmTime.value == '00:00'
+                                                ?formatTime(controller.dashboardScreenController.timer.value)
+                                                : formatTimes(controller.bedTimeScreenController.alarmTime.value),
+                                            // controller.dashboardScreenController.timer.value,
+
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+
+                                        Text(
+                                          'Next Alarm',
+                                          style: TextStyle(
+                                            fontSize: 18,
+
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
                             ),
                             // Add other text widgets if needed
                           ],
                         ),
                       ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 20.0),
+                      //
+                      // ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
+                        padding: const EdgeInsets.only(right: 20.0,bottom: 0),
+                        child: Obx(() => Switch(
+                          value: controller.isSwitched.value, // Use .value to access the boolean value of RxBool
+                          onChanged: (bool value) {
+                            // Update the value of isSwitched
+                            controller.isSwitched.value = value;
 
+                            // You can perform additional actions based on the switch value here
+                            if (controller.isSwitched.value) {
+                              // Switch is ON
+                              print('Switch is ON');
+                              // Perform actions when the switch is ON
+                            } else {
+                              // Switch is OFF
+                              print('Switch is OFF');
+                              // Perform actions when the switch is OFF
+                            }
+                          },
+                          activeColor: Color(0xff8650F6).withOpacity(0.5), // Customize the active color
+                          inactiveThumbColor: Colors.grey, // Customize the inactive thumb color
+                          inactiveTrackColor: Colors.grey.withOpacity(0.5), // Customize the inactive track color
+                        )),
                       ),
-                      Switch(
-                        value: true, // Set your initial switch state here
-                        onChanged: (bool value) {
-                          // Update the state variable when the switch is toggled
-                          // setState(() {
-                          //   isSwitched = value;
-                          // });
-
-                          // You can perform additional actions based on the switch value here
-                          if (isSwitched) {
-                            // Switch is ON
-                            print('Switch is ON');
-                            // Perform actions when the switch is ON
-                          } else {
-                            // Switch is OFF
-                            print('Switch is OFF');
-                            // Perform actions when the switch is OFF
-                          }
-                        },
-                        activeColor: Colors.grey, // Customize the active color
-                        inactiveThumbColor: Colors.grey, // Customize the inactive thumb color
-                        inactiveTrackColor: Colors.grey.withOpacity(0.5), // Customize the inactive track color
-                      ),
+                      // Switch(
+                      //   value: false, // Set your initial switch state here
+                      //   onChanged: (bool value) {
+                      //     controller.onalarmTap();
+                      //     // Update the state variable when the switch is toggled
+                      //     // setState(() {
+                      //     //   isSwitched = value;
+                      //     // });
+                      //
+                      //     // You can perform additional actions based on the switch value here
+                      //     if (isSwitched) {
+                      //       // Switch is ON
+                      //       print('Switch is ON');
+                      //       // Perform actions when the switch is ON
+                      //     } else {
+                      //       controller.onalarmTap();
+                      //
+                      //       // Switch is OFF
+                      //       print('Switch is OFF');
+                      //       // Perform actions when the switch is OFF
+                      //     }
+                      //   },
+                      //   activeColor: Colors.grey, // Customize the active color
+                      //   inactiveThumbColor: Colors.grey, // Customize the inactive thumb color
+                      //   inactiveTrackColor: Colors.grey.withOpacity(0.5), // Customize the inactive track color
+                      // ),
                     ],
                   ),
 
@@ -470,12 +751,26 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      '10 : PM',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                    Obx(
+                                    ()=> Text(
+                                        // '10 : PM',
+                                        // controller.bedTimeScreenController.bedTime.value == '00:00'
+                                        //     ?formatTime(controller.dashboardScreenController.bedtime.value)
+                                        //     : formatTimes(controller.bedTimeScreenController.bedTime.value),
+
+
+                                      controller.notificationScreenController.bedTimes.value == ''
+                                          ? formatTime(controller.dashboardScreenController.bedtime.value)
+                                          : '${controller.notificationScreenController.bedTimes.value}',
+
+                                        // controller.dashboardScreenController.bedtime.value != ''
+                                        //     ? formatTime(controller.dashboardScreenController.bedtime.value)
+                                        //     : '00:00',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
 
@@ -520,11 +815,15 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                               ),
 
                               Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                                padding: const EdgeInsets.only(left: 10),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '06 : 30 AM',
+                                      // '06 : 30 AM',
+                                      controller.notificationScreenController.wakeup.value == ''
+                                          ? '${controller.dashboardScreenController.wakeup.value} am'
+                                          : '${controller.notificationScreenController.wakeup.value} am',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -533,7 +832,7 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                                     ),
 
                                     Text(
-                                      'Awake up',
+                                      'woke up          ',
                                       style: TextStyle(
                                         fontSize: 12,
 
@@ -564,12 +863,15 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                   height: 20,
                 ),
                 Row(
+
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: [
                           Row(
+
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 30.0),
@@ -587,7 +889,6 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                                   ],
                                 ),
                               ),
-
                             ],
                           ),
                           // Add other text widgets if needed
@@ -595,58 +896,59 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30.0),
-                      child: Image.asset(
-                        'assets/octobar.png',
-                        width: 70,
 
-                      ),
-                    ),
                   ],
                 ),
 
                 Container(
                   padding: EdgeInsets.only(left: 20, right:20, top: 15),
                   height: 80,
+                  // child: ListView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   children: [
+                  //     _buildProductCard(context ,'1'),
+                  //     _buildProductCard(context ,'2' ),
+                  //     _buildProductCard(context ,'3' ),
+                  //     _buildProductCard(context ,'4'),
+                  //     _buildProductCard(context ,'5' ),
+                  //     _buildProductCard(context ,'6' ),
+                  //     _buildProductCard(context ,'7'),
+                  //     _buildProductCard(context ,'8' ),
+                  //     _buildProductCard(context ,'9' ),
+                  //     _buildProductCard(context ,'10'),
+                  //     _buildProductCard(context ,'11' ),
+                  //     _buildProductCard(context ,'12' ),
+                  //     _buildProductCard(context ,'13'),
+                  //     _buildProductCard(context ,'14' ),
+                  //     _buildProductCard(context ,'15' ),
+                  //     _buildProductCard(context ,'16'),
+                  //     _buildProductCard(context ,'17' ),
+                  //     _buildProductCard(context ,'18' ),
+                  //     _buildProductCard(context ,'19'),
+                  //     _buildProductCard(context ,'20' ),
+                  //     _buildProductCard(context ,'21' ),
+                  //     _buildProductCard(context ,'22'),
+                  //     _buildProductCard(context ,'23' ),
+                  //     _buildProductCard(context ,'24' ),
+                  //     _buildProductCard(context ,'25' ),
+                  //     _buildProductCard(context ,'26' ),
+                  //     _buildProductCard(context ,'27'),
+                  //     _buildProductCard(context ,'28' ),
+                  //     _buildProductCard(context ,'29' ),
+                  //     _buildProductCard(context ,'30' ),
+                  //
+                  //
+                  //     // Add more product cards as needed
+                  //   ],
+                  // ),
+
+
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      _buildProductCard(context ,'1'),
-                      _buildProductCard(context ,'2' ),
-                      _buildProductCard(context ,'3' ),
-                      _buildProductCard(context ,'4'),
-                      _buildProductCard(context ,'5' ),
-                      _buildProductCard(context ,'6' ),
-                      _buildProductCard(context ,'7'),
-                      _buildProductCard(context ,'8' ),
-                      _buildProductCard(context ,'9' ),
-                      _buildProductCard(context ,'10'),
-                      _buildProductCard(context ,'11' ),
-                      _buildProductCard(context ,'12' ),
-                      _buildProductCard(context ,'13'),
-                      _buildProductCard(context ,'14' ),
-                      _buildProductCard(context ,'15' ),
-                      _buildProductCard(context ,'16'),
-                      _buildProductCard(context ,'17' ),
-                      _buildProductCard(context ,'18' ),
-                      _buildProductCard(context ,'19'),
-                      _buildProductCard(context ,'20' ),
-                      _buildProductCard(context ,'21' ),
-                      _buildProductCard(context ,'22'),
-                      _buildProductCard(context ,'23' ),
-                      _buildProductCard(context ,'24' ),
-                      _buildProductCard(context ,'25' ),
-                      _buildProductCard(context ,'26' ),
-                      _buildProductCard(context ,'27'),
-                      _buildProductCard(context ,'28' ),
-                      _buildProductCard(context ,'29' ),
-                      _buildProductCard(context ,'30' ),
-
-
-                      // Add more product cards as needed
-                    ],
-                  ),
+                    children: List.generate(30, (index) {
+                      return _buildProductCard(context, (index + 1).toString(), currentDate);
+                    }),
+                ),
                 ),
 
                 SizedBox(height: 10,),
@@ -687,18 +989,46 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
 
 
 
+                                // Padding(
+                                //   padding: const EdgeInsets.only(left: 10.0,bottom: 30),
+                                //   child: Switch(
+                                //     value: true, // Set your initial switch state here
+                                //     onChanged: (bool value) {
+                                //       controller.onanalysisTap();
+                                //       // Update the state variable when the switch is toggled
+                                //       // setState(() {
+                                //       //   isSwitched = value;
+                                //       // });
+                                //
+                                //       // You can perform additional actions based on the switch value here
+                                //       if (isSwitched) {
+                                //         // Switch is ON
+                                //         print('Switch is ON');
+                                //         // Perform actions when the switch is ON
+                                //       } else {
+                                //       controller.onanalysisTap();
+                                //         // Switch is OFF
+                                //         print('Switch is OFF');
+                                //         // Perform actions when the switch is OFF
+                                //       }
+                                //     },
+                                //     activeColor: Colors.white, // Customize the active color
+                                //     inactiveThumbColor: Colors.grey, // Customize the inactive thumb color
+                                //     inactiveTrackColor: Colors.grey.withOpacity(0.5), // Customize the inactive track color
+                                //   ),
+                                // ),
+
+
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 10.0,bottom: 30),
-                                  child: Switch(
-                                    value: true, // Set your initial switch state here
+                                  padding: const EdgeInsets.only(left: 20.0,bottom: 20),
+                                  child: Obx(() => Switch(
+                                    value: controller.isSwitched2.value, // Use .value to access the boolean value of RxBool
                                     onChanged: (bool value) {
-                                      // Update the state variable when the switch is toggled
-                                      // setState(() {
-                                      //   isSwitched = value;
-                                      // });
+                                      // Update the value of isSwitched
+                                      controller.isSwitched2.value = value;
 
                                       // You can perform additional actions based on the switch value here
-                                      if (isSwitched) {
+                                      if (controller.isSwitched2.value) {
                                         // Switch is ON
                                         print('Switch is ON');
                                         // Perform actions when the switch is ON
@@ -711,11 +1041,8 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                                     activeColor: Colors.white, // Customize the active color
                                     inactiveThumbColor: Colors.grey, // Customize the inactive thumb color
                                     inactiveTrackColor: Colors.grey.withOpacity(0.5), // Customize the inactive track color
-                                  ),
+                                  )),
                                 ),
-
-
-
 
 
 
@@ -734,26 +1061,51 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                                     onTap:(){
                                           controller.onanalysisTap();
         },
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          '8 : 30 Hour',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Obx( ()=>
+                                            Text(
+                                            //   controller.notificationScreenController.bedTimes.value == ''
+                                            // ? formatTime(controller.dashboardScreenController.bedtime.value)
+                                            // : '${controller.notificationScreenController.bedTimes.value}',
 
-                                        Text(
-                                          '1:30 hours over the limit',
-                                          style: TextStyle(
-                                            fontSize: 12,
+                                              controller.bedTimeScreenController.bedTime.value == '00:00'
+                                                  ?formatTime(controller.dashboardScreenController.bedtime.value)
+                                                  : formatTimes(controller.bedTimeScreenController.bedTime.value),
 
-                                            color: Colors.white,
+                                              // controller.dashboardScreenController.bedtime.value != ''
+                                              //     ? formatTime(controller.dashboardScreenController.bedtime.value)
+                                              //     : '00:00',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          // Text(
+                                          //   '8 : 30 Hour',
+                                          //   style: TextStyle(
+                                          //     fontSize: 20,
+                                          //     fontWeight: FontWeight.bold,
+                                          //     color: Colors.white,
+                                          //   ),
+                                          // ),
+
+                                          Text(
+                                            'Goal bedtime',
+                                            style: TextStyle(
+                                              fontSize: 12,
+
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(height:15),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -828,219 +1180,36 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                               children: <Widget>[
                                 Flexible(
                                   // padding: const EdgeInsets.only(left: 0.0, top: 10),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        '6 Hour',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                  child: GestureDetector(
+                                    onTap:(){
+                                      controller.onalarmTap();
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Text(
+
+                                          controller.notificationScreenController.wakeTime.value == ''
+                                              ? '${controller.dashboardScreenController.totallastsleep.toString()} Hour'
+                                              : '${controller.notificationScreenController.wakeTime} Hour',
+                                          // '${controller.dashboardScreenController.totallastsleep.toString()} Hour',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                      ),
 
-                                      Text(
-                                        'An excellent nights sleep',
-                                        style: TextStyle(
-                                          fontSize: 12,
+                                        Text(
+                                          'Need Atlease 6 hours of nights sleep',
+                                          style: TextStyle(
+                                            fontSize: 12,
 
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-
-
-
-
-
-
-
-
-
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-                          ],
-                        ),
-
-
-
-
-
-
-
-
-                      ),
-
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 20,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 0, bottom: 0, right: 10, left: 20), // Adjust margin for the paddings
-                        padding: EdgeInsets.all(20), // Adjust padding for the entire content
-                        decoration: BoxDecoration(
-                          color: Color(0xffD8D8D8).withOpacity(0.2), // Set your desired box color
-                          borderRadius: BorderRadius.circular(20), // Optional: Add border radius
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 0, bottom: 20),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.white.withOpacity(0.1), // shadow color
-                                          spreadRadius: 0, // spread radius
-                                          blurRadius: 15, // blur radius
-                                          offset: Offset(0, 4), // changes position of shadow
+                                            color: Colors.white,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
                                       ],
                                     ),
-                                    child: Image.asset(
-                                      'assets/Interruption.png',
-                                      width: 50,
-                                    ),
-                                  ),
-                                ),
-
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  // padding: const EdgeInsets.only(left: 0.0, top: 0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Interruption',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-
-                                      Text(
-                                        '2 times sleep interruption',
-                                        style: TextStyle(
-                                          fontSize: 10,
-
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-
-
-
-
-
-
-
-
-
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-                          ],
-                        ),
-
-
-
-
-
-
-
-
-                      ),
-
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 0, bottom: 0, right: 20, left: 0), // Adjust margin for the paddings
-                        padding: EdgeInsets.all(20), // Adjust padding for the entire content
-                        decoration: BoxDecoration(
-                          color: Color(0xffD8D8D8).withOpacity(0.2), // Set your desired box color
-                          borderRadius: BorderRadius.circular(20), // Optional: Add border radius
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 0, bottom: 20),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.white.withOpacity(0.2), // shadow color
-                                          spreadRadius: 0, // spread radius
-                                          blurRadius: 7, // blur radius
-                                          offset: Offset(0, 4), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/zzz.png',
-                                      width: 50,
-                                    ),
-                                  ),
-                                ),
-
-
-                                // Add other text widgets or content if needed
-                              ],
-                            ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  // padding: const EdgeInsets.only(left: 0.0, top: 0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        '2 : 30 Hour',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-
-                                      Text(
-                                        'It was an easy light sleep',
-                                        style: TextStyle(
-                                          fontSize: 10,
-
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ),
 
@@ -1075,7 +1244,9 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                 ),
 
 
-                SizedBox(height: 20,),
+
+
+                SizedBox(height: 40,),
 
 
 
@@ -1234,17 +1405,106 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
     );
   }
 
+  // String formatTime(String timeString) {
+  //   print('data $timeString');
+  //   final parsedTime = DateTime.parse('2022-01-01 $timeString');
+  //   return DateFormat('h:mm a').format(parsedTime);
+  // }
 
-  Widget _buildProductCard(BuildContext context , String title) {
+  String formatTime(String timeString) {
+    if (timeString == null || timeString.isEmpty) {
+      return '00:00'; // Return a default value for null or empty time strings
+    } else {
+      try {
+        final parsedTime = DateTime.parse('2022-01-01 $timeString');
+        return DateFormat('h:mm a').format(parsedTime);
+      } catch (e) {
+        print('Error parsing time: $e');
+        return 'Invalid Time'; // Return a message indicating an invalid time format
+      }
+    }
+  }
+
+  String formatTimes(String timeString) {
+    final parsedTime = DateTime.parse(timeString);
+    return DateFormat('h:mm a').format(parsedTime);
+  }
+
+  String formatAlarmTime(String timeString) {
+    // Check if the timeString contains only time without date
+    if (timeString.contains(':')) {
+      // If it contains only time, parse it with today's date
+      final parsedTime = DateTime.parse('2024-05-16 $timeString');
+      return DateFormat('h:mm a').format(parsedTime);
+    } else {
+      // If it contains a complete date-time string, parse it directly
+      final parsedTime = DateTime.parse(timeString);
+      return DateFormat('h:mm a').format(parsedTime);
+    }
+  }
+
+
+
+  // Widget _buildProductCard(BuildContext context , String title , String currentDate) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       controller.onHistoryTap();
+  //       // controller.onInfluncerTap(title: title , description: description, imageUrl: imageUrl );
+  //
+  //     },
+  //     child: Container(
+  //       width: 55,
+  //
+  //       margin: EdgeInsets.only(left: 8, right: 8),
+  //       child: Column(
+  //         children: <Widget>[
+  //           Container(
+  //             height: 55,
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(8),
+  //               // boxShadow: [
+  //               //   BoxShadow(
+  //               //     color: Colors.black.withOpacity(0.5),
+  //               //     blurRadius: 5,
+  //               //     spreadRadius: 0,
+  //               //     offset: Offset(0, 3),
+  //               //   ),
+  //               // ],
+  //               // You can set a background color for the container if needed
+  //               color: Color(0xffD8D8D8).withOpacity(0.2),
+  //             ),
+  //             child: Center(
+  //               child: Text(
+  //                 title,
+  //                 style: TextStyle(
+  //                   fontSize: 18,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Colors.white,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //
+  //
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
+
+  Widget _buildProductCard(BuildContext context, String title, String currentDate) {
     return GestureDetector(
       onTap: () {
-        controller.onanalysisTap();
-        // controller.onInfluncerTap(title: title , description: description, imageUrl: imageUrl );
+
+        controller.main(title);
+
+
 
       },
       child: Container(
         width: 55,
-
         margin: EdgeInsets.only(left: 8, right: 8),
         child: Column(
           children: <Widget>[
@@ -1252,16 +1512,9 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
               height: 55,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.black.withOpacity(0.5),
-                //     blurRadius: 5,
-                //     spreadRadius: 0,
-                //     offset: Offset(0, 3),
-                //   ),
-                // ],
-                // You can set a background color for the container if needed
-                color: Color(0xffD8D8D8).withOpacity(0.2),
+                color: title == currentDate
+                    ? Color(0xff8650F6).withOpacity(0.7) // Change to your desired highlight color
+                    : Color(0xffD8D8D8).withOpacity(0.2),
               ),
               child: Center(
                 child: Text(
@@ -1274,17 +1527,11 @@ class MainDashboradScreen extends GetView<MainDashboardScreenController>{
                 ),
               ),
             ),
-
-
           ],
         ),
       ),
     );
   }
-
-
-
-
 
 
 }
